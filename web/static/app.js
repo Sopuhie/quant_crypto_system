@@ -10,6 +10,7 @@ const els = {
   strategiesBody: document.getElementById("strategies-body"),
   positionsBody: document.getElementById("positions-body"),
   ordersBody: document.getElementById("orders-body"),
+  klinesBody: document.getElementById("klines-body"),
   toast: document.getElementById("toast"),
 };
 
@@ -101,6 +102,29 @@ function renderPositions(rows) {
     .join("");
 }
 
+function renderKlines(rows) {
+  if (!rows.length) {
+    els.klinesBody.innerHTML = `<tr><td colspan="8" class="empty">暂无 K 线缓存</td></tr>`;
+    return;
+  }
+
+  els.klinesBody.innerHTML = rows
+    .map(
+      (row) => `
+      <tr>
+        <td>${fmtTime(row.open_time)}</td>
+        <td>${row.symbol || "-"}</td>
+        <td>${row.interval || "-"}</td>
+        <td>${fmtNum(row.open)}</td>
+        <td>${fmtNum(row.high)}</td>
+        <td>${fmtNum(row.low)}</td>
+        <td>${fmtNum(row.close)}</td>
+        <td>${fmtNum(row.volume, 4)}</td>
+      </tr>`
+    )
+    .join("");
+}
+
 function renderOrders(rows) {
   if (!rows.length) {
     els.ordersBody.innerHTML = `<tr><td colspan="8" class="empty">暂无订单</td></tr>`;
@@ -126,17 +150,19 @@ function renderOrders(rows) {
 
 async function refreshAll() {
   try {
-    const [status, orders, positions, strategies] = await Promise.all([
+    const [status, orders, positions, strategies, klines] = await Promise.all([
       api("/api/status"),
       api("/api/orders"),
       api("/api/positions"),
       api("/api/strategies"),
+      api("/api/klines"),
     ]);
 
     renderStatus(status);
     renderOrders(orders);
     renderPositions(positions);
     renderStrategies(strategies);
+    renderKlines(klines);
   } catch (err) {
     els.healthBadge.textContent = "离线";
     els.healthBadge.className = "badge badge-warn";

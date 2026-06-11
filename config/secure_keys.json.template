@@ -1,0 +1,5 @@
+{
+  "BINANCE_API_KEY": "在此填入你的 Binance API Key",
+  "BINANCE_API_SECRET": "在此填入你的 Binance API Secret",
+  "BINANCE_SANDBOX": true
+}

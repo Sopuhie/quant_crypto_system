@@ -1,2 +1,6 @@
 2026-06-11 11:04:29 | ERROR    | test | failure
 2026-06-11 11:15:16 | ERROR    | engine.risk_controller | Circuit breaker tripped: daily drawdown 15.00% exceeds limit 10.00%
+2026-06-11 15:29:46 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:30:06 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:32:07 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:32:07 | ERROR    | gateway.binance_client | Binance spot authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}. Check secure_keys.json: use testnet keys when BINANCE_SANDBOX=true, ensure IP whitelist is open, and enable Reading permission.

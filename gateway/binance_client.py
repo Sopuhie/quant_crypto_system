@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-import os
 import time
 from typing import Any, Callable, Literal, Optional, TypeVar
 
 import ccxt
 
+from config.settings import load_binance_credentials
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -69,8 +69,9 @@ class BinanceClient:
         max_retries: int = 3,
         retry_delay_sec: float = 1.0,
     ) -> None:
-        self.api_key = api_key or os.getenv("BINANCE_API_KEY", "")
-        self.api_secret = api_secret or os.getenv("BINANCE_API_SECRET", "")
+        file_key, file_secret = load_binance_credentials()
+        self.api_key = api_key or file_key or ""
+        self.api_secret = api_secret or file_secret or ""
         self.sandbox = sandbox
         self.timeout_ms = timeout_ms
         self.max_retries = max_retries
@@ -78,17 +79,20 @@ class BinanceClient:
 
         self._spot: Optional[ccxt.binance] = None
         self._futures: Optional[ccxt.binance] = None
+        self.public_only: bool = False
 
-    def _base_config(self) -> dict[str, Any]:
-        if not self.api_key or not self.api_secret:
+    @property
+    def has_credentials(self) -> bool:
+        return bool(self.api_key and self.api_secret)
+
+    def _base_config(self, *, require_auth: bool = True) -> dict[str, Any]:
+        if require_auth and not self.has_credentials:
             raise AuthenticationError(
                 "Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET "
                 "or pass api_key/api_secret to BinanceClient."
             )
 
-        return {
-            "apiKey": self.api_key,
-            "secret": self.api_secret,
+        config: dict[str, Any] = {
             "enableRateLimit": True,
             "timeout": self.timeout_ms,
             "options": {
@@ -96,40 +100,93 @@ class BinanceClient:
                 "recvWindow": 10_000,
             },
         }
+        if self.has_credentials:
+            config["apiKey"] = self.api_key
+            config["secret"] = self.api_secret
+        return config
 
-    def _build_exchange(self, default_type: MarketType) -> ccxt.binance:
-        config = self._base_config()
+    def _build_exchange(
+        self,
+        default_type: MarketType,
+        *,
+        require_auth: bool = True,
+    ) -> ccxt.binance:
+        config = self._base_config(require_auth=require_auth)
         config["options"] = {
             **config["options"],
             "defaultType": "future" if default_type == "futures" else "spot",
         }
         exchange = ccxt.binance(config)
-        if self.sandbox:
+        if self.sandbox and self.has_credentials:
             exchange.set_sandbox_mode(True)
         return exchange
 
     @property
     def spot(self) -> ccxt.binance:
         if self._spot is None:
-            self._spot = self._build_exchange("spot")
+            require_auth = not self.public_only
+            self._spot = self._build_exchange("spot", require_auth=require_auth)
         return self._spot
 
     @property
     def futures(self) -> ccxt.binance:
         if self._futures is None:
-            self._futures = self._build_exchange("futures")
+            self._futures = self._build_exchange("futures", require_auth=True)
         return self._futures
 
     def get_exchange(self, market_type: MarketType) -> ccxt.binance:
         return self.futures if market_type == "futures" else self.spot
 
+    def _init_public_spot(self) -> None:
+        """Initialize spot client without credentials (public OHLCV only)."""
+        self.public_only = True
+        self._spot = None
+        self._futures = None
+        exchange = self._build_exchange("spot", require_auth=False)
+        self.safe_call(exchange.load_markets)
+        self._spot = exchange
+        logger.info("Binance public market-data client initialized")
+
     def initialize(self) -> None:
-        """Load markets and verify credentials for spot and futures."""
+        """Load markets; verify balances when API credentials are valid."""
         logger.info("Initializing Binance CCXT clients (sandbox=%s)", self.sandbox)
-        for market_type in ("spot", "futures"):
-            exchange = self.get_exchange(market_type)
-            self.safe_call(exchange.load_markets)
-            self.safe_call(exchange.fetch_balance)
+        if not self.has_credentials:
+            logger.warning(
+                "No API credentials configured. Running in public market-data mode "
+                "(OHLCV sync only; no balance checks or order placement)."
+            )
+            self._init_public_spot()
+            return
+
+        self.public_only = False
+        try:
+            spot = self.get_exchange("spot")
+            self.safe_call(spot.load_markets)
+            self.safe_call(spot.fetch_balance)
+            logger.info("Binance spot client authenticated successfully")
+        except AuthenticationError as exc:
+            logger.error(
+                "Binance spot authentication failed: %s. "
+                "Check secure_keys.json: use testnet keys when BINANCE_SANDBOX=true, "
+                "ensure IP whitelist is open, and enable Reading permission.",
+                exc,
+            )
+            logger.warning("Falling back to public market-data mode (no trading).")
+            self._init_public_spot()
+            return
+
+        try:
+            futures = self.get_exchange("futures")
+            self.safe_call(futures.load_markets)
+            self.safe_call(futures.fetch_balance)
+            logger.info("Binance futures client authenticated successfully")
+        except AuthenticationError as exc:
+            logger.warning(
+                "Binance futures authentication skipped: %s. Spot trading remains available.",
+                exc,
+            )
+            self._futures = None
+
         logger.info("Binance clients initialized successfully")
 
     def safe_call(

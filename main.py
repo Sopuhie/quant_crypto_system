@@ -9,7 +9,6 @@ import signal
 from typing import Any, Optional
 
 from config.settings import (
-    BINANCE_SANDBOX,
     DB_PATH,
     KLINE_INTERVAL,
     KLINE_LIMIT,
@@ -20,6 +19,8 @@ from config.settings import (
     MAX_ORDERS_PER_MINUTE,
     SYMBOL_WHITELIST,
     TICK_INTERVAL_SEC,
+    load_binance_credentials,
+    load_binance_sandbox,
 )
 from database.connection import DatabaseConnection
 from engine.risk_controller import RiskConfig, RiskController, RiskViolation
@@ -39,18 +40,19 @@ class QuantTradingSystem:
         self,
         strategies: list[BaseStrategy],
         *,
-        sandbox: bool = BINANCE_SANDBOX,
+        sandbox: Optional[bool] = None,
         tick_interval: float = TICK_INTERVAL_SEC,
     ) -> None:
         self.strategies = strategies
-        self.sandbox = sandbox
+        self.sandbox = load_binance_sandbox() if sandbox is None else sandbox
         self.tick_interval = tick_interval
         self._running = False
         self._active = False
         self._shutdown_event = asyncio.Event()
 
         self.db = DatabaseConnection(DB_PATH)
-        self.client = BinanceClient(sandbox=sandbox)
+        api_key, api_secret = load_binance_credentials()
+        self.client = BinanceClient(api_key, api_secret, sandbox=self.sandbox)
         self.executor = OrderExecutor(self.client)
         self.risk = RiskController(
             RiskConfig(
@@ -66,12 +68,7 @@ class QuantTradingSystem:
         logger.info("Starting quant trading system (sandbox=%s)", self.sandbox)
         self.db.initialize_schema()
 
-        try:
-            await asyncio.to_thread(self.client.initialize)
-        except AuthenticationError:
-            logger.warning(
-                "Binance credentials unavailable; running in offline simulation mode"
-            )
+        await asyncio.to_thread(self.client.initialize)
 
         # Sync historical bars to ensure indicator vectors are full on boot
         logger.info("Syncing historical kline buffers for initialized strategies...")
@@ -120,9 +117,11 @@ class QuantTradingSystem:
         self._running = True
         self._active = True
         logger.info(
-            "System ready: strategies=%s symbols=%s",
+            "System ready: strategies=%s symbols=%s tick=%ss mode=%s",
             len(self.strategies),
             SYMBOL_WHITELIST,
+            self.tick_interval,
+            "public-data-only" if self.client.public_only else "full-trading",
         )
 
     @property
@@ -158,6 +157,8 @@ class QuantTradingSystem:
         self._shutdown_event.set()
 
     async def _refresh_equity(self) -> None:
+        if not self.client.has_credentials:
+            return
         try:
             balance = await asyncio.to_thread(self.client.spot.fetch_balance)
             total_usdt = float(balance.get("total", {}).get("USDT", 0) or 0)
@@ -375,8 +376,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--sandbox",
         action="store_true",
-        default=BINANCE_SANDBOX,
-        help="Use Binance sandbox/testnet",
+        default=load_binance_sandbox(),
+        help="Use Binance sandbox/testnet (overrides secure_keys.json when passed)",
     )
     parser.add_argument(
         "--tick-interval",

@@ -6,6 +6,7 @@ import json
 import sqlite3
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
+from urllib.parse import urlparse
 
 from config.settings import DB_PATH, WEB_HOST, WEB_PORT
 from utils.logger import get_logger, setup_logging
@@ -31,7 +32,8 @@ class DashboardHTTPHandler(BaseHTTPRequestHandler):
         self._set_headers(status=200)
 
     def do_GET(self) -> None:
-        path = self.path.split("?", 1)[0]
+        parsed_url = urlparse(self.path)
+        path = parsed_url.path
 
         if path == "/api/status":
             self.get_system_status()
@@ -41,11 +43,13 @@ class DashboardHTTPHandler(BaseHTTPRequestHandler):
             self.get_account_positions()
         elif path == "/api/strategies":
             self.get_strategy_configs()
+        elif path == "/api/klines":
+            self.get_market_klines()
         else:
             self.serve_static_files(path)
 
     def serve_static_files(self, path: str) -> None:
-        if path in ("/", ""):
+        if path == "/" or path == "":
             file_path = STATIC_DIR / "index.html"
         elif path.startswith("/static/"):
             file_path = STATIC_DIR / path.removeprefix("/static/")
@@ -60,7 +64,8 @@ class DashboardHTTPHandler(BaseHTTPRequestHandler):
                 content_type = "text/javascript"
 
             self._set_headers(content_type=content_type, status=200)
-            self.wfile.write(file_path.read_bytes())
+            with open(file_path, "rb") as f:
+                self.wfile.write(f.read())
         else:
             self._set_headers(content_type="text/plain", status=404)
             self.wfile.write(b"404 Not Found")
@@ -88,7 +93,6 @@ class DashboardHTTPHandler(BaseHTTPRequestHandler):
             self._set_headers()
             self.wfile.write(json.dumps(response).encode("utf-8"))
         except Exception as exc:
-            logger.error("Failed to read system status: %s", exc)
             self._set_headers(status=500)
             self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
 
@@ -105,7 +109,6 @@ class DashboardHTTPHandler(BaseHTTPRequestHandler):
             self._set_headers()
             self.wfile.write(json.dumps(orders).encode("utf-8"))
         except Exception as exc:
-            logger.error("Failed to read trade orders: %s", exc)
             self._set_headers(status=500)
             self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
 
@@ -122,7 +125,6 @@ class DashboardHTTPHandler(BaseHTTPRequestHandler):
             self._set_headers()
             self.wfile.write(json.dumps(positions).encode("utf-8"))
         except Exception as exc:
-            logger.error("Failed to read account positions: %s", exc)
             self._set_headers(status=500)
             self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
 
@@ -139,7 +141,24 @@ class DashboardHTTPHandler(BaseHTTPRequestHandler):
             self._set_headers()
             self.wfile.write(json.dumps(strategies).encode("utf-8"))
         except Exception as exc:
-            logger.error("Failed to read strategy configs: %s", exc)
+            self._set_headers(status=500)
+            self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
+
+    def get_market_klines(self) -> None:
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT * FROM market_kline ORDER BY open_time DESC LIMIT 50"
+            )
+            rows = cursor.fetchall()
+            conn.close()
+
+            klines = [dict(row) for row in rows]
+            self._set_headers()
+            self.wfile.write(json.dumps(klines).encode("utf-8"))
+        except Exception as exc:
             self._set_headers(status=500)
             self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
 
@@ -148,7 +167,11 @@ def run_server() -> None:
     setup_logging()
     server_address = (WEB_HOST, WEB_PORT)
     httpd = HTTPServer(server_address, DashboardHTTPHandler)
-    logger.info("Web Dashboard Server running on http://%s:%s", WEB_HOST, WEB_PORT)
+    logger.info(
+        "Web Dashboard Server running natively on http://%s:%s",
+        WEB_HOST,
+        WEB_PORT,
+    )
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
