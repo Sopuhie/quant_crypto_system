@@ -1,27 +1,13 @@
-"""FastAPI web dashboard for the quantitative trading system."""
+"""Pure stdlib HTTP dashboard serving SQLite data and static UI files."""
 
 from __future__ import annotations
 
-import asyncio
-from contextlib import asynccontextmanager
+import json
+import sqlite3
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
-from typing import Any, Optional
 
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field
-
-from config.settings import (
-    BINANCE_SANDBOX,
-    DB_PATH,
-    LOG_DIR,
-    TICK_INTERVAL_SEC,
-    WEB_HOST,
-    WEB_PORT,
-)
-from database.connection import DatabaseConnection
-from main import QuantTradingSystem, _load_strategies_from_db
+from config.settings import DB_PATH, WEB_HOST, WEB_PORT
 from utils.logger import get_logger, setup_logging
 
 logger = get_logger(__name__)
@@ -29,197 +15,146 @@ logger = get_logger(__name__)
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 
-class StartRequest(BaseModel):
-    sandbox: bool = BINANCE_SANDBOX
-    tick_interval: float = Field(default=TICK_INTERVAL_SEC, gt=0)
+class DashboardHTTPHandler(BaseHTTPRequestHandler):
+    def log_message(self, format: str, *args) -> None:
+        logger.debug("HTTP %s", format % args)
 
+    def _set_headers(self, content_type: str = "application/json", status: int = 200) -> None:
+        self.send_response(status)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
 
-class SystemManager:
-    """Manage QuantTradingSystem lifecycle inside the FastAPI event loop."""
+    def do_OPTIONS(self) -> None:
+        self._set_headers(status=200)
 
-    def __init__(self) -> None:
-        self.system: Optional[QuantTradingSystem] = None
-        self.task: Optional[asyncio.Task[None]] = None
-        self.last_error: Optional[str] = None
+    def do_GET(self) -> None:
+        path = self.path.split("?", 1)[0]
 
-    @property
-    def is_running(self) -> bool:
-        return self.task is not None and not self.task.done()
+        if path == "/api/status":
+            self.get_system_status()
+        elif path == "/api/orders":
+            self.get_trade_orders()
+        elif path == "/api/positions":
+            self.get_account_positions()
+        elif path == "/api/strategies":
+            self.get_strategy_configs()
+        else:
+            self.serve_static_files(path)
 
-    async def start(self, *, sandbox: bool, tick_interval: float) -> None:
-        if self.is_running:
-            raise HTTPException(status_code=409, detail="Trading system is already running")
+    def serve_static_files(self, path: str) -> None:
+        if path in ("/", ""):
+            file_path = STATIC_DIR / "index.html"
+        elif path.startswith("/static/"):
+            file_path = STATIC_DIR / path.removeprefix("/static/")
+        else:
+            file_path = STATIC_DIR / path.lstrip("/")
 
-        db = DatabaseConnection(DB_PATH)
-        db.initialize_schema()
-        strategies = _load_strategies_from_db(db)
+        if file_path.exists() and file_path.is_file():
+            content_type = "text/html"
+            if file_path.suffix == ".css":
+                content_type = "text/css"
+            elif file_path.suffix == ".js":
+                content_type = "text/javascript"
 
-        self.last_error = None
-        self.system = QuantTradingSystem(
-            strategies,
-            sandbox=sandbox,
-            tick_interval=tick_interval,
-        )
-        self.task = asyncio.create_task(self._run(), name="quant-trading-loop")
-        logger.info("Trading system task started (sandbox=%s)", sandbox)
+            self._set_headers(content_type=content_type, status=200)
+            self.wfile.write(file_path.read_bytes())
+        else:
+            self._set_headers(content_type="text/plain", status=404)
+            self.wfile.write(b"404 Not Found")
 
-    async def _run(self) -> None:
-        assert self.system is not None
+    def get_system_status(self) -> None:
         try:
-            await self.system.run()
-        except asyncio.CancelledError:
-            logger.info("Trading system task cancelled")
-            raise
-        except Exception as exc:
-            self.last_error = str(exc)
-            logger.exception("Trading system crashed: %s", exc)
-        finally:
-            self.task = None
+            conn = sqlite3.connect(DB_PATH)
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
 
-    async def stop(self) -> None:
-        if not self.is_running or self.system is None:
-            return
+            cursor.execute("SELECT COUNT(*) as cnt FROM trade_orders")
+            total_orders = cursor.fetchone()["cnt"]
 
-        self.system.request_shutdown()
-        assert self.task is not None
-        try:
-            await asyncio.wait_for(self.task, timeout=30.0)
-        except asyncio.TimeoutError:
-            self.task.cancel()
-            try:
-                await self.task
-            except asyncio.CancelledError:
-                pass
-        self.system = None
-        logger.info("Trading system stopped")
+            cursor.execute("SELECT COUNT(*) as cnt FROM strategy_config WHERE status='active'")
+            active_strategies = cursor.fetchone()["cnt"]
 
-    def get_status(self) -> dict[str, Any]:
-        if self.system is None:
-            return {
-                "running": False,
-                "task_alive": self.is_running,
-                "last_error": self.last_error,
-                "risk": {},
+            conn.close()
+
+            response = {
+                "status": "running",
+                "database_connected": True,
+                "total_orders_recorded": total_orders,
+                "active_strategies_count": active_strategies,
             }
+            self._set_headers()
+            self.wfile.write(json.dumps(response).encode("utf-8"))
+        except Exception as exc:
+            logger.error("Failed to read system status: %s", exc)
+            self._set_headers(status=500)
+            self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
 
-        status = self.system.get_status()
-        status["task_alive"] = self.is_running
-        status["last_error"] = self.last_error
-        return status
+    def get_trade_orders(self) -> None:
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM trade_orders ORDER BY id DESC LIMIT 50")
+            rows = cursor.fetchall()
+            conn.close()
 
+            orders = [dict(row) for row in rows]
+            self._set_headers()
+            self.wfile.write(json.dumps(orders).encode("utf-8"))
+        except Exception as exc:
+            logger.error("Failed to read trade orders: %s", exc)
+            self._set_headers(status=500)
+            self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
 
-manager = SystemManager()
+    def get_account_positions(self) -> None:
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM account_position ORDER BY updated_at DESC")
+            rows = cursor.fetchall()
+            conn.close()
 
+            positions = [dict(row) for row in rows]
+            self._set_headers()
+            self.wfile.write(json.dumps(positions).encode("utf-8"))
+        except Exception as exc:
+            logger.error("Failed to read account positions: %s", exc)
+            self._set_headers(status=500)
+            self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    setup_logging(log_dir=LOG_DIR)
-    DatabaseConnection(DB_PATH).initialize_schema()
-    logger.info("Web dashboard ready at http://%s:%s", WEB_HOST, WEB_PORT)
-    yield
-    await manager.stop()
+    def get_strategy_configs(self) -> None:
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM strategy_config")
+            rows = cursor.fetchall()
+            conn.close()
 
-
-app = FastAPI(
-    title="Quant Crypto System",
-    description="Binance quantitative trading dashboard",
-    version="1.0.0",
-    lifespan=lifespan,
-)
-
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-
-
-def _read_db_rows(query: str, params: tuple[Any, ...] = (), limit: int = 50) -> list[dict[str, Any]]:
-    db = DatabaseConnection(DB_PATH)
-    conn = db.get_connection()
-    rows = conn.execute(query, (*params, limit)).fetchall()
-    return [dict(row) for row in rows]
-
-
-@app.get("/")
-async def index() -> FileResponse:
-    return FileResponse(STATIC_DIR / "index.html")
-
-
-@app.get("/api/health")
-async def health() -> dict[str, str]:
-    return {"status": "ok"}
-
-
-@app.get("/api/system/status")
-async def system_status() -> dict[str, Any]:
-    return manager.get_status()
-
-
-@app.post("/api/system/start")
-async def system_start(body: StartRequest) -> dict[str, Any]:
-    await manager.start(sandbox=body.sandbox, tick_interval=body.tick_interval)
-    return {"ok": True, "status": manager.get_status()}
-
-
-@app.post("/api/system/stop")
-async def system_stop() -> dict[str, Any]:
-    await manager.stop()
-    return {"ok": True, "status": manager.get_status()}
+            strategies = [dict(row) for row in rows]
+            self._set_headers()
+            self.wfile.write(json.dumps(strategies).encode("utf-8"))
+        except Exception as exc:
+            logger.error("Failed to read strategy configs: %s", exc)
+            self._set_headers(status=500)
+            self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
 
 
-@app.post("/api/risk/reset-circuit-breaker")
-async def reset_circuit_breaker() -> dict[str, Any]:
-    if manager.system is None:
-        raise HTTPException(status_code=400, detail="Trading system is not initialized")
-    manager.system.risk.reset_circuit_breaker()
-    return {"ok": True, "status": manager.get_status()}
+def run_server() -> None:
+    setup_logging()
+    server_address = (WEB_HOST, WEB_PORT)
+    httpd = HTTPServer(server_address, DashboardHTTPHandler)
+    logger.info("Web Dashboard Server running on http://%s:%s", WEB_HOST, WEB_PORT)
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        logger.info("Stopping Web Dashboard server...")
+        httpd.server_close()
 
 
-@app.get("/api/orders")
-async def recent_orders(limit: int = 20) -> list[dict[str, Any]]:
-    limit = max(1, min(limit, 100))
-    return _read_db_rows(
-        """
-        SELECT id, strategy_name, client_order_id, exchange_order_id, symbol,
-               side, order_type, price, quantity, filled_quantity, status,
-               created_at, updated_at
-        FROM trade_orders
-        ORDER BY id DESC
-        LIMIT ?
-        """,
-        limit=limit,
-    )
-
-
-@app.get("/api/klines")
-async def recent_klines(symbol: Optional[str] = None, limit: int = 20) -> list[dict[str, Any]]:
-    limit = max(1, min(limit, 100))
-    if symbol:
-        return _read_db_rows(
-            """
-            SELECT symbol, interval, open_time, open, high, low, close, volume
-            FROM market_kline
-            WHERE symbol = ?
-            ORDER BY open_time DESC
-            LIMIT ?
-            """,
-            (symbol,),
-            limit=limit,
-        )
-    return _read_db_rows(
-        """
-        SELECT symbol, interval, open_time, open, high, low, close, volume
-        FROM market_kline
-        ORDER BY open_time DESC
-        LIMIT ?
-        """,
-        limit=limit,
-    )
-
-
-@app.get("/api/logs")
-async def tail_logs(log_type: str = "info", lines: int = 80) -> dict[str, Any]:
-    lines = max(10, min(lines, 500))
-    log_file = LOG_DIR / ("error.log" if log_type == "error" else "info.log")
-    if not log_file.exists():
-        return {"log_type": log_type, "lines": []}
-
-    content = log_file.read_text(encoding="utf-8", errors="replace").splitlines()
-    return {"log_type": log_type, "lines": content[-lines:]}
+if __name__ == "__main__":
+    run_server()

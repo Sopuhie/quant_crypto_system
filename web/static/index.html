@@ -11,69 +11,51 @@
     <header class="header">
       <div>
         <h1>Quant Crypto System</h1>
-        <p class="subtitle">Binance 量化交易控制台</p>
+        <p class="subtitle">SQLite 实时监控面板</p>
       </div>
       <div class="header-actions">
         <span id="health-badge" class="badge badge-muted">检测中...</span>
-        <button id="btn-start" class="btn btn-primary">启动系统</button>
-        <button id="btn-stop" class="btn btn-danger" disabled>停止系统</button>
+        <button id="btn-refresh" class="btn btn-primary">刷新数据</button>
       </div>
     </header>
 
     <section class="cards" id="status-cards">
       <article class="card">
-        <span class="label">运行状态</span>
-        <strong id="stat-running">-</strong>
+        <span class="label">系统状态</span>
+        <strong id="stat-status">-</strong>
       </article>
       <article class="card">
-        <span class="label">模式</span>
-        <strong id="stat-sandbox">-</strong>
+        <span class="label">数据库</span>
+        <strong id="stat-db">-</strong>
       </article>
       <article class="card">
-        <span class="label">账户权益 (USDT)</span>
-        <strong id="stat-equity">-</strong>
-      </article>
-      <article class="card">
-        <span class="label">当日回撤</span>
-        <strong id="stat-drawdown">-</strong>
-      </article>
-      <article class="card">
-        <span class="label">熔断器</span>
-        <strong id="stat-breaker">-</strong>
-      </article>
-      <article class="card">
-        <span class="label">策略数量</span>
+        <span class="label">活跃策略</span>
         <strong id="stat-strategies">-</strong>
       </article>
-    </section>
-
-    <section class="panel">
-      <div class="panel-head">
-        <h2>风控与配置</h2>
-        <button id="btn-reset-breaker" class="btn btn-secondary">重置熔断器</button>
-      </div>
-      <div class="meta-grid" id="risk-meta"></div>
+      <article class="card">
+        <span class="label">订单总数</span>
+        <strong id="stat-orders">-</strong>
+      </article>
     </section>
 
     <div class="grid-2">
       <section class="panel">
         <div class="panel-head">
-          <h2>最近订单</h2>
-          <button class="btn btn-ghost" data-refresh="orders">刷新</button>
+          <h2>策略配置</h2>
         </div>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>时间</th>
-                <th>策略</th>
+                <th>策略名</th>
                 <th>交易对</th>
-                <th>方向</th>
-                <th>数量</th>
                 <th>状态</th>
+                <th>目标盈利</th>
+                <th>目标止损</th>
+                <th>更新时间</th>
               </tr>
             </thead>
-            <tbody id="orders-body">
+            <tbody id="strategies-body">
               <tr><td colspan="6" class="empty">暂无数据</td></tr>
             </tbody>
           </table>
@@ -82,23 +64,22 @@
 
       <section class="panel">
         <div class="panel-head">
-          <h2>最近 K 线</h2>
-          <button class="btn btn-ghost" data-refresh="klines">刷新</button>
+          <h2>账户持仓</h2>
         </div>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>时间</th>
+                <th>账户类型</th>
+                <th>资产</th>
                 <th>交易对</th>
-                <th>周期</th>
-                <th>开</th>
-                <th>高</th>
-                <th>低</th>
-                <th>收</th>
+                <th>可用</th>
+                <th>冻结</th>
+                <th>总量</th>
+                <th>未实现盈亏</th>
               </tr>
             </thead>
-            <tbody id="klines-body">
+            <tbody id="positions-body">
               <tr><td colspan="7" class="empty">暂无数据</td></tr>
             </tbody>
           </table>
@@ -108,13 +89,27 @@
 
     <section class="panel">
       <div class="panel-head">
-        <h2>运行日志</h2>
-        <div class="tabs">
-          <button class="tab active" data-log="info">Info</button>
-          <button class="tab" data-log="error">Error</button>
-        </div>
+        <h2>最近订单</h2>
       </div>
-      <pre id="log-view" class="log-view">加载中...</pre>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>策略</th>
+              <th>交易对</th>
+              <th>方向</th>
+              <th>类型</th>
+              <th>数量</th>
+              <th>价格</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody id="orders-body">
+            <tr><td colspan="8" class="empty">暂无数据</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
   </div>
 

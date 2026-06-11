@@ -1,19 +1,12 @@
-"""Launch the FastAPI web dashboard."""
+"""Launch the stdlib HTTP web dashboard."""
 
 from __future__ import annotations
 
-import uvicorn
-
-from config.settings import WEB_HOST, WEB_PORT
+from web.app import run_server
 
 
 def main() -> None:
-    uvicorn.run(
-        "web.app:app",
-        host=WEB_HOST,
-        port=WEB_PORT,
-        reload=False,
-    )
+    run_server()
 
 
 if __name__ == "__main__":
