@@ -38,6 +38,8 @@ class RiskController:
     _day_start_equity: Optional[float] = field(default=None, init=False)
     _current_equity: Optional[float] = field(default=None, init=False)
     _circuit_breaker_tripped: bool = field(default=False, init=False)
+    _breaker_alert_pending: bool = field(default=False, init=False)
+    _last_breaker_reason: Optional[str] = field(default=None, init=False)
 
     @property
     def circuit_breaker_tripped(self) -> bool:
@@ -51,7 +53,15 @@ class RiskController:
 
     def trip_circuit_breaker(self, reason: str) -> None:
         self._circuit_breaker_tripped = True
+        self._last_breaker_reason = reason
+        self._breaker_alert_pending = True
         logger.error("Circuit breaker tripped: %s", reason)
+
+    def consume_breaker_alert(self) -> Optional[str]:
+        if not self._breaker_alert_pending:
+            return None
+        self._breaker_alert_pending = False
+        return self._last_breaker_reason
 
     def reset_circuit_breaker(self) -> None:
         self._circuit_breaker_tripped = False

@@ -1,440 +1,86 @@
-================================================================================
-CURSOR IMPLEMENTATION GUIDE: TRANSITIONING TO PRODUCTION-READY WEBSOCKETS
+CURSOR IMPLEMENTATION GUIDE: EXTENDING INSTANT NOTIFICATION TELEGRAM ENGINE
 Target Environment: macOS (Single-User Lightweight Edition)
 Core Task:
-Review the latest repository upload and implement the next critical architectural upgrade. We will transition the market data ingest layer from polling REST API endpoints to a persistent, low-latency, asynchronous WebSocket Stream using CCXT Pro. This keeps the engine real-time and prevents Binance API rate-limiting blocks.
+Create a dedicated utility module utils/notifier.py and implement an asynchronous instant messaging forwarder (supporting Telegram Bot or Webhook). Tie this notifier into the main order execution and risk exception pipelines so the system can proactively send trade confirmations or circuit-breaker alerts directly to your phone.
 
-CODEBASE REVIEWS AND AUDIT REPORT
-Audit Status:
-The safety lock logic (self_is_order_pending) has been integrated flawlessly into strategies/ma_trend_strategy.py. Order tracking and multi-order loop shielding are now complete.
-
-Architectural Efficiency Bottleneck (REST Rate Limits):
-Currently, main.py uses _fetch_latest_kline inside an infinite loop that runs every few seconds, hitting the fetch_ohlcv REST endpoint repeatedly.
-While this works perfectly for sandbox testing, running multiple strategies or symbols on a live account via REST polling will quickly trigger an HTTP 429 (Rate Limit Exceeded) error from Binance. To fix this, we will introduce a dedicated WebSocket background task using ccxt.pro.
-
-MODIFIED FILE: OVERHAULING MAIN.PY WITH LIVE WEBSOCKET INGEST
-Path: main.py
+NEW FILE: CODING THE INSTANT TELEGRAM / WEBHOOK ALERT HUB
+Path: utils/notifier.py
 Action Required:
-Modify main.py to spin up an active background coroutine task using watch_ohlcv or watch_ticker. For our MACD/KDJ candle-based strategy, we will create an asynchronous live pipeline that receives real-time closing bars via WebSockets, updates the SQLite database, and feeds them right into the strategy engine instantly.
+Instruct Cursor to create a brand new utility file under utils/notifier.py to manage outward communications without blocking the core asynchronous event streams.
 
-Replacement Content for main.py:
+File Content for utils/notifier.py:
 
-"""System bootstrapper and main asynchronous trading loop with live WebSocket stream."""
-
-from future import annotations
-
-import argparse
-import asyncio
+import urllib.request
 import json
-import signal
-import sys
-from typing import Any, Optional
-
-import ccxt.pro as ccxtpro
-
-from config.settings import (
-BINANCE_SANDBOX,
-DB_PATH,
-KLINE_INTERVAL,
-KLINE_LIMIT,
-LOG_DIR,
-MAX_DAILY_DRAWDOWN_PCT,
-MAX_LEVERAGE,
-MAX_ORDER_NOTIONAL_USD,
-MAX_ORDERS_PER_MINUTE,
-SYMBOL_WHITELIST,
-TICK_INTERVAL_SEC,
-)
-from database.connection import DatabaseConnection
-from engine.risk_controller import RiskConfig, RiskController, RiskViolation
-from gateway.binance_client import AuthenticationError, BinanceClient
-from gateway.order_executor import OrderExecutor
-from strategies.base_strategy import BaseStrategy
-from strategies.ma_trend_strategy import MaTrendStrategy
-from utils.logger import get_logger, setup_logging
+import os
+import asyncio
+from utils.logger import get_logger
 
 logger = get_logger(name)
 
-class QuantTradingSystem:
-"""Wire database, gateway, risk control, and strategies into an async WebSocket stream."""
+class SystemNotifier:
+def init(self) -> None:
+# Configuration environments fetched from environment or settings
+self.telegram_token = os.getenv("TELEGRAM_BOT_TOKEN", "")
+self.telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID", "")
+self.webhook_url = os.getenv("GENERIC_WEBHOOK_URL", "") # Supports generic Discord/DingTalk webhooks
 
-def __init__(
-    self,
-    strategies: list[BaseStrategy],
-    *,
-    sandbox: bool = BINANCE_SANDBOX,
-    tick_interval: float = TICK_INTERVAL_SEC,
-) -> None:
-    self.strategies = strategies
-    self.sandbox = sandbox
-    self.tick_interval = tick_interval
-    self._running = False
-    self._active = False
-    self._shutdown_event = asyncio.Event()
-    self._ws_tasks: list[asyncio.Task] = []
-
-    self.db = DatabaseConnection(DB_PATH)
-    self.client = BinanceClient(sandbox=sandbox)
-    self.executor = OrderExecutor(self.client)
-    self.risk = RiskController(
-        RiskConfig(
-            max_leverage=MAX_LEVERAGE,
-            max_daily_drawdown_pct=MAX_DAILY_DRAWDOWN_PCT,
-            max_order_notional_usd=MAX_ORDER_NOTIONAL_USD,
-            max_orders_per_minute=MAX_ORDERS_PER_MINUTE,
-            symbol_whitelist=SYMBOL_WHITELIST,
-        )
-    )
-
-    # Initialize CCXT Pro client for WebSocket connections
-    config = {
-        "enableRateLimit": True,
-        "options": {"defaultType": "spot"},
-    }
-    self.ws_client = ccxtpro.binance(config)
-    if sandbox:
-        self.ws_client.set_sandbox_mode(True)
-
-async def startup(self) -> None:
-    logger.info("Starting quant trading system (sandbox=%s)", self.sandbox)
-    self.db.initialize_schema()
-
-    try:
-        await asyncio.to_thread(self.client.initialize)
-    except AuthenticationError:
-        logger.warning(
-            "Binance credentials unavailable; running in offline simulation mode"
-        )
-
-    # Sync historical bars to ensure indicator vectors are full on boot
-    logger.info("Syncing historical kline buffers for initialized strategies...")
-    for strategy in self.strategies:
-        try:
-            rows = await asyncio.to_thread(
-                self.client.spot.fetch_ohlcv,
-                strategy.symbol,
-                KLINE_INTERVAL,
-                None,
-                KLINE_LIMIT,
-            )
-            if rows:
-                synced_count = 0
-                for row in rows:
-                    ts, open_, high, low, close, volume = row
-                    kline_data = {
-                        "symbol": strategy.symbol,
-                        "interval": KLINE_INTERVAL,
-                        "open_time": ts,
-                        "open": open_,
-                        "high": high,
-                        "low": low,
-                        "close": close,
-                        "volume": volume,
-                    }
-                    await self._persist_kline(kline_data)
-                    synced_count += 1
-                logger.info("Successfully synced %s historical bars for %s", synced_count, strategy.symbol)
-        except Exception as exc:
-            logger.warning("Failed to warm up historical database buffer for %s: %s", strategy.symbol, exc)
-
-    await self._refresh_equity()
-    for strategy in self.strategies:
-        await strategy.start()
-
-    self._running = True
-    self._active = True
-    logger.info(
-        "System ready: strategies=%s symbols=%s",
-        len(self.strategies),
-        SYMBOL_WHITELIST,
-    )
-
-    # Spawn a background WebSocket stream task for each loaded strategy symbol
-    for strategy in self.strategies:
-        task = asyncio.create_task(self._websocket_market_stream(strategy))
-        self._ws_tasks.append(task)
-
-async def _websocket_market_stream(self, strategy: BaseStrategy) -> None:
-    """Persistent low-latency loop consuming candles via CCXT Pro WebSockets."""
-    logger.info("WebSocket stream activated for symbol %s", strategy.symbol)
-    while self._running:
-        try:
-            # Watch incoming candle via WebSocket connection stream
-            ohlcv = await self.ws_client.watch_ohlcv(strategy.symbol, KLINE_INTERVAL)
-            if not ohlcv:
-                continue
-            
-            ts, open_, high, low, close, volume = ohlcv[-1]
-            kline = {
-                "symbol": strategy.symbol,
-                "interval": KLINE_INTERVAL,
-                "open_time": ts,
-                "open": open_,
-                "high": high,
-                "low": low,
-                "close": close,
-                "volume": volume,
-            }
-            
-            # Persist bar into local sqlite storage
-            await self._persist_kline(kline)
-            
-            # Immediately execute strategy cycle evaluation using fresh data
-            if not self.risk.circuit_breaker_tripped:
-                kline_signals = await strategy.on_kline_update(kline)
-                if kline_signals:
-                    await self._dispatch_signals(strategy, kline_signals)
-            else:
-                logger.error("Circuit breaker active; skipping strategy execution")
-                
-        except Exception as e:
-            logger.error("WebSocket stream error on %s: %s", strategy.symbol, e)
-            await asyncio.sleep(5)  # Backoff penalty before automatic reconnection
-
-@property
-def is_running(self) -> bool:
-    return self._running and self._active
-
-def get_status(self) -> dict[str, Any]:
-    risk_status = self.risk.get_status()
-    return {
-        "running": self.is_running,
-        "sandbox": self.sandbox,
-        "tick_interval": self.tick_interval,
-        "strategy_count": len(self.strategies),
-        "strategies": [
-            {"name": s.name, "symbol": s.symbol, "running": s.is_running}
-            for s in self.strategies
-        ],
-        "risk": risk_status,
-    }
-
-async def shutdown(self) -> None:
-    if not self._active:
+async def send_notification(self, text: str) -> None:
+    \"\"\"Asynchronously dispatches raw textual logs to external server channels without stopping loops.\"\"\"
+    if not text:
         return
-    self._running = False
-    self._active = False
-    logger.info("Shutting down quant trading system")
 
-    # Cancel WebSocket feed streams cleanly
-    for task in self._ws_tasks:
-        task.cancel()
-    await asyncio.gather(*self._ws_tasks, return_exceptions=True)
-    await self.ws_client.close()
+    # Attempt Telegram Forwarding if tokens are available
+    if self.telegram_token and self.telegram_chat_id:
+        await self._send_telegram(text)
+    
+    # Attempt standard Webhook forwarding if configured
+    if self.webhook_url:
+        await self._send_webhook(text)
+        
+    logger.debug("Local broadcast captured inside notification pool: %s", text)
 
-    for strategy in self.strategies:
-        await strategy.stop()
-
-    await asyncio.to_thread(self.client.close)
-    self.db.close()
-    self._shutdown_event.set()
-
-async def _refresh_equity(self) -> None:
+async def _send_telegram(self, text: str) -> None:
+    url = f"[https://api.telegram.org/bot](https://api.telegram.org/bot){self.telegram_token}/sendMessage"
+    payload = {"chat_id": self.telegram_chat_id, "text": text, "parse_mode": "HTML"}
     try:
-        balance = await asyncio.to_thread(self.client.spot.fetch_balance)
-        total_usdt = float(balance.get("total", {}).get("USDT", 0) or 0)
-        self.risk.update_equity(total_usdt)
-        logger.debug("Equity snapshot updated: USDT=%.4f", total_usdt)
-    except Exception as exc:
-        logger.warning("Unable to refresh equity for risk checks: %s", exc)
+        await asyncio.to_thread(self._execute_post, url, payload)
+    except Exception as e:
+        logger.error("Failed to route notification via Telegram network channels: %s", e)
 
-async def _persist_kline(self, kline: dict[str, Any]) -> None:
-    with self.db.transaction() as conn:
-        conn.execute(
-            """
-            INSERT INTO market_kline (
-                symbol, interval, open_time, open, high, low, close, volume
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(symbol, interval, open_time) DO UPDATE SET
-                open=excluded.open,
-                high=excluded.high,
-                low=excluded.low,
-                close=excluded.close,
-                volume=excluded.volume
-            """,
-            (
-                kline["symbol"],
-                kline["interval"],
-                kline["open_time"],
-                kline["open"],
-                kline["high"],
-                kline["low"],
-                kline["close"],
-                kline["volume"],
-            ),
-        )
-
-async def _execute_signal(self, signal: dict[str, Any]) -> Optional[dict[str, Any]]:
+async def _send_webhook(self, text: str) -> None:
+    payload = {"text": f"[QUANT SYSTEM NOTICE] {text}"}
     try:
-        self.risk.approve_and_record(signal)
-    except RiskViolation as exc:
-        logger.warning("Signal blocked by risk controller [%s]: %s", exc.code, exc)
-        return None
+        await asyncio.to_thread(self._execute_post, self.webhook_url, payload)
+    except Exception as e:
+        logger.error("Failed to route notification via generic webhook payload: %s", e)
 
-    action = signal.get("action", "create")
-    market_type = signal.get("market_type", "spot")
-    symbol = signal["symbol"]
+def _execute_post(self, url: str, data: dict) -> None:
+    req = urllib.request.Request(url, method="POST")
+    req.add_header("Content-Type", "application/json; charset=utf-8")
+    jsondata = json.dumps(data).encode("utf-8")
+    with urllib.request.urlopen(req, data=jsondata, timeout=5) as response:
+        response.read()
+MODIFIED FILE: CONNECTING THE NOTIFIER TO MAIN EXECUTIVE EVENT PIPELINE
+Path: main.py
+Action Required:
+Open main.py, import the newly constructed SystemNotifier class framework, and invoke its async delivery triggers inside the _execute_signal method and trip_circuit_breaker sequences to receive real-time updates.
 
-    try:
-        if action == "cancel":
-            result = await asyncio.to_thread(
-                self.executor.cancel_order,
-                market_type,
-                symbol,
-                order_id=signal.get("exchange_order_id"),
-                client_order_id=signal.get("client_order_id"),
-            )
-        else:
-            result = await asyncio.to_thread(
-                self.executor.create_order,
-                market_type,
-                symbol,
-                signal["side"],
-                signal["order_type"],
-                float(signal["quantity"]),
-                price=signal.get("price"),
-                client_order_id=signal.get("client_order_id"),
-                params=signal.get("params"),
-            )
-    except Exception as exc:
-        logger.error("Order execution failed: %s", exc)
-        return None
+Modification Instructions for main.py:
 
-    await self._persist_trade_order(signal, result)
-    return result
+Import the class: from utils.notifier import SystemNotifier
 
-async def _persist_trade_order(
-    self,
-    signal: dict[str, Any],
-    result: dict[str, Any],
-) -> None:
-    with self.db.transaction() as conn:
-        conn.execute(
-            """
-            INSERT INTO trade_orders (
-                strategy_name, client_order_id, exchange_order_id, symbol,
-                side, order_type, price, quantity, filled_quantity, status, signal_json
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(client_order_id) DO UPDATE SET
-                exchange_order_id=excluded.exchange_order_id,
-                filled_quantity=excluded.filled_quantity,
-                status=excluded.status,
-                updated_at=datetime('now')
-            """,
-            (
-                signal.get("strategy_name", "unknown"),
-                result.get("client_order_id") or signal.get("client_order_id"),
-                result.get("exchange_order_id"),
-                result.get("symbol") or signal.get("symbol"),
-                result.get("side") or signal.get("side"),
-                result.get("order_type") or signal.get("order_type"),
-                result.get("price"),
-                result.get("quantity") or signal.get("quantity"),
-                result.get("filled_quantity") or 0,
-                result.get("status"),
-                json.dumps(signal, ensure_ascii=False),
-            ),
-        )
+Initialize it in QuantTradingSystem.__init__: self.notifier = SystemNotifier()
 
-async def _dispatch_signals(
-    self,
-    strategy: BaseStrategy,
-    signals: list[dict[str, Any]],
-) -> None:
-    for signal in signals:
-        result = await self._execute_signal(signal)
-        if result is not None:
-            await strategy.on_order_status(result)
+In _execute_signal, right after successful create_order fill executions, add:
+await self.notifier.send_notification(f"🟢 <b>订单成交确认</b>\\n交易对: {symbol}\\n方向: {signal['side']}\\n数量: {signal['quantity']}")
 
-async def run(self) -> None:
-    await self.startup()
-    try:
-        while self._running:
-            await self._refresh_equity()
-
-            # Periodic time-driven ticker event tracking hooks
-            if not self.risk.circuit_breaker_tripped:
-                for strategy in self.strategies:
-                    tick_signals = await strategy.on_tick()
-                    if tick_signals:
-                        await self._dispatch_signals(strategy, tick_signals)
-
-            try:
-                await asyncio.wait_for(
-                    self._shutdown_event.wait(),
-                    timeout=self.tick_interval,
-                )
-                break
-            except asyncio.TimeoutError:
-                continue
-    finally:
-        await self.shutdown()
-
-def request_shutdown(self) -> None:
-    self._running = False
-    self._shutdown_event.set()
-def _load_strategies_from_db(db: DatabaseConnection) -> list[BaseStrategy]:
-"""Dynamically constructs runtime active strategy objects linked into the main execution array."""
-_ = db
-active_instances: list[BaseStrategy] = []
-
-active_instances.append(
-    MaTrendStrategy(
-        name="BTC_ShortTerm_Trend",
-        symbol="BTC/USDT",
-        params={
-            "market_type": "spot",
-            "order_quantity": 0.0005,
-            "fast_period": 12,
-            "slow_period": 26,
-            "signal_period": 9,
-        },
-    )
-)
-return active_instances
-def parse_args() -> argparse.Namespace:
-parser = argparse.ArgumentParser(description="Binance quantitative trading system")
-parser.add_argument(
-"--sandbox",
-action="store_true",
-default=BINANCE_SANDBOX,
-help="Use Binance sandbox/testnet",
-)
-parser.add_argument(
-"--tick-interval",
-type=float,
-default=TICK_INTERVAL_SEC,
-help="Main loop interval in seconds",
-)
-return parser.parse_args()
-
-async def async_main(strategies: Optional[list[BaseStrategy]] = None) -> None:
-setup_logging(log_dir=LOG_DIR)
-args = parse_args()
-
-db = DatabaseConnection(DB_PATH)
-db.initialize_schema()
-active_strategies = strategies if strategies is not None else _load_strategies_from_db(db)
-
-system = QuantTradingSystem(
-    active_strategies,
-    sandbox=args.sandbox,
-    tick_interval=args.tick_interval,
-)
-
-loop = asyncio.get_running_loop()
-for sig in (signal.SIGINT, signal.SIGTERM):
-    try:
-        loop.add_signal_handler(sig, system.request_shutdown)
-    except NotImplementedError:
-        pass
-
-await system.run()
-def main() -> None:
-asyncio.run(async_main())
-
-if name == "main":
-main()
+In engine/risk_controller.py, pass or bind the notifier to trigger messages if the daily drawdown circuit breaker fires.
 
 CURSOR EXECUTION SHORTCUT PROMPT
-Please open main.py and overwrite its content entirely with the updated asynchronous WebSocket-driven infrastructure. This integrates ccxt.pro to watch live market candle tickers via background streams, eliminating REST polling bottlenecks entirely and updating local SQLite state pipelines natively.
+Please read the framework extension specs.
+
+Create a new utility class under utils/notifier.py using standard low-overhead native request handlers.
+
+Integrate this notifier inside main.py under the QuantTradingSystem lifecycle, wiring it to emit push alerts automatically to your configured credentials upon successful order creation fills or pre-trade wind-down risk control violations.
+================================================================================

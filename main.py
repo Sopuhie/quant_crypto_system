@@ -31,6 +31,7 @@ from gateway.order_executor import OrderExecutor
 from strategies.base_strategy import BaseStrategy
 from strategies.ma_trend_strategy import MaTrendStrategy
 from utils.logger import get_logger, setup_logging
+from utils.notifier import SystemNotifier
 
 logger = get_logger(__name__)
 
@@ -58,6 +59,7 @@ class QuantTradingSystem:
         self.client = BinanceClient(api_key, api_secret, sandbox=self.sandbox)
         self.executor = OrderExecutor(self.client)
         self.ws_client = self._build_ws_client()
+        self.notifier = SystemNotifier()
         self.risk = RiskController(
             RiskConfig(
                 max_leverage=MAX_LEVERAGE,
@@ -266,6 +268,10 @@ class QuantTradingSystem:
             self.risk.approve_and_record(signal)
         except RiskViolation as exc:
             logger.warning("Signal blocked by risk controller [%s]: %s", exc.code, exc)
+            if exc.code == "circuit_breaker":
+                await self.notifier.send_notification(
+                    f"🚨 熔断拦截\n{exc}"
+                )
             return None
 
         action = signal.get("action", "create")
@@ -298,6 +304,15 @@ class QuantTradingSystem:
             return None
 
         await self._persist_trade_order(signal, result)
+
+        if action != "cancel" and result.get("status") in ("closed", "FILLED"):
+            await self.notifier.send_notification(
+                f"🟢 订单成交确认\n"
+                f"交易对: {symbol}\n"
+                f"方向: {signal['side']}\n"
+                f"数量: {signal['quantity']}"
+            )
+
         return result
 
     async def _persist_trade_order(
@@ -333,6 +348,50 @@ class QuantTradingSystem:
                 ),
             )
 
+            if result.get("status") in ("closed", "FILLED"):
+                side = result.get("side") or signal.get("side")
+                market_type = signal.get("market_type", "spot")
+                symbol = result.get("symbol") or signal.get("symbol")
+                qty = float(
+                    result.get("filled_quantity")
+                    or result.get("quantity")
+                    or signal.get("quantity")
+                    or 0.0
+                )
+                price = float(result.get("price") or 0.0)
+                asset = symbol.split("/")[0]
+
+                if side == "buy":
+                    free = qty
+                    total = qty
+                    entry_price = price
+                else:
+                    free = 0.0
+                    total = 0.0
+                    entry_price = None
+
+                conn.execute(
+                    """
+                    INSERT INTO account_position (
+                        account_type, asset, symbol, free, total, position_side, entry_price
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(account_type, asset, symbol, position_side) DO UPDATE SET
+                        free = excluded.free,
+                        total = excluded.total,
+                        entry_price = excluded.entry_price,
+                        updated_at = datetime('now')
+                    """,
+                    (
+                        market_type,
+                        asset,
+                        symbol,
+                        free,
+                        total,
+                        "long",
+                        entry_price,
+                    ),
+                )
+
     async def _dispatch_signals(
         self,
         strategy: BaseStrategy,
@@ -353,11 +412,24 @@ class QuantTradingSystem:
 
     async def run(self) -> None:
         await self.startup()
+        last_equity_refresh = 0.0
+        equity_refresh_cooldown = 30.0
+
         try:
             while self._running:
-                await self._refresh_equity()
+                now = asyncio.get_running_loop().time()
+                if now - last_equity_refresh >= equity_refresh_cooldown:
+                    await self._refresh_equity()
+                    last_equity_refresh = now
+                    breaker_reason = self.risk.consume_breaker_alert()
+                    if breaker_reason:
+                        await self.notifier.send_notification(
+                            f"🚨 熔断触发\n{breaker_reason}"
+                        )
 
-                if not self.risk.circuit_breaker_tripped:
+                if self.risk.circuit_breaker_tripped:
+                    logger.error("Circuit breaker active; skipping strategy cycle")
+                else:
                     for strategy in self.strategies:
                         tick_signals = await strategy.on_tick()
                         if tick_signals:

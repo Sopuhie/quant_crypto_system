@@ -372,3 +372,107 @@
 2026-06-11 15:57:56 | ERROR    | __main__ | Order execution failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
 2026-06-11 16:03:52 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
 2026-06-11 16:03:52 | ERROR    | gateway.binance_client | Binance spot authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}. Check secure_keys.json: use testnet keys when BINANCE_SANDBOX=true, ensure IP whitelist is open, and enable Reading permission.
+2026-06-11 16:11:00 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:11:00 | ERROR    | gateway.binance_client | Binance spot authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}. Check secure_keys.json: use testnet keys when BINANCE_SANDBOX=true, ensure IP whitelist is open, and enable Reading permission.
+2026-06-11 16:11:12 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:11:28 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:11:44 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:12:00 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:12:16 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:12:32 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:12:48 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:13:04 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:13:20 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:13:36 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binance.vision/api/v3/exchangeInfo
+2026-06-11 16:13:48 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:13:48 | ERROR    | gateway.binance_client | Binance spot authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}. Check secure_keys.json: use testnet keys when BINANCE_SANDBOX=true, ensure IP whitelist is open, and enable Reading permission.
+2026-06-11 16:14:00 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:14:16 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:14:32 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:14:48 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:15:04 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:15:20 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:15:36 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:15:52 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:16:08 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:16:24 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:16:40 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:16:56 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binance.vision/api/v3/exchangeInfo
+2026-06-11 16:17:12 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:17:28 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:17:44 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:18:00 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:18:16 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:18:32 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:18:48 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:19:04 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:19:20 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:19:36 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:19:52 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binance.vision/api/v3/exchangeInfo
+2026-06-11 16:20:08 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:20:24 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:20:40 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:20:56 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:21:12 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:21:28 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:21:44 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:22:00 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:22:16 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:22:32 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:22:48 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binance.vision/api/v3/exchangeInfo
+2026-06-11 16:23:04 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:23:20 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:23:36 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:23:52 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:24:08 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:24:24 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:24:40 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:24:56 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:25:12 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:25:28 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:25:44 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binance.vision/api/v3/exchangeInfo
+2026-06-11 16:26:00 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:26:16 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:26:32 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:26:48 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:27:04 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:27:20 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binance.vision/api/v3/exchangeInfo
+2026-06-11 16:27:36 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:27:52 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:28:08 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:28:24 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:28:40 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binance.vision/api/v3/exchangeInfo
+2026-06-11 16:28:56 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:29:12 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:29:28 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:29:44 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:30:00 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:30:16 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:30:32 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:30:48 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:31:04 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:31:20 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:31:36 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binance.vision/api/v3/exchangeInfo
+2026-06-11 16:31:52 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:32:08 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:32:24 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:32:40 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:32:52 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:32:52 | ERROR    | gateway.binance_client | Binance spot authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}. Check secure_keys.json: use testnet keys when BINANCE_SANDBOX=true, ensure IP whitelist is open, and enable Reading permission.
+2026-06-11 16:33:05 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:33:21 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:33:37 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:33:53 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:34:09 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:34:25 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binance.vision/api/v3/exchangeInfo
+2026-06-11 16:34:41 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:34:57 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:35:13 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:35:35 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:35:35 | ERROR    | gateway.binance_client | Binance spot authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}. Check secure_keys.json: use testnet keys when BINANCE_SANDBOX=true, ensure IP whitelist is open, and enable Reading permission.
+2026-06-11 16:35:47 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:36:03 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:36:19 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:36:35 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:36:51 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
+2026-06-11 16:37:07 | ERROR    | __main__ | WebSocket stream error on BTC/USDT: binance GET https://testnet.binancefuture.com/dapi/v1/exchangeInfo
