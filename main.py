@@ -302,6 +302,14 @@ class QuantTradingSystem:
             result = await self._execute_signal(signal)
             if result is not None:
                 await strategy.on_order_status(result)
+            elif hasattr(strategy, "is_order_pending"):
+                await strategy.on_order_status(
+                    {
+                        "status": "rejected",
+                        "side": signal.get("side"),
+                        "price": signal.get("price"),
+                    }
+                )
 
     async def _run_strategy_cycle(self, strategy: BaseStrategy) -> None:
         if not strategy.is_running:

@@ -43,6 +43,7 @@ class MaTrendStrategy(BaseStrategy):
         self.last_signal_time: Optional[int] = None
         self.has_position = False
         self.entry_price: Optional[float] = None
+        self.is_order_pending = False
 
     async def start(self) -> None:
         """Executed on bootstrapper launch; pulls target constraints if required."""
@@ -107,7 +108,7 @@ class MaTrendStrategy(BaseStrategy):
 
     async def on_kline_update(self, kline: dict[str, Any]) -> list[dict[str, Any]]:
         """Fires whenever the market core engine updates or caches a new Bar."""
-        if not self.is_running:
+        if not self.is_running or self.is_order_pending:
             return []
 
         df = self._calculate_indicators()
@@ -148,6 +149,7 @@ class MaTrendStrategy(BaseStrategy):
                     quantity=self.order_quantity,
                     client_order_id=client_id,
                 )
+                self.is_order_pending = True
                 signals.append(signal)
 
         # 2. Production Exit Execution: MACD Death Cross OR Defensive Take-Profit / Stop-Loss
@@ -157,7 +159,7 @@ class MaTrendStrategy(BaseStrategy):
             stop_loss_triggered = False
             take_profit_triggered = False
 
-            if hasattr(self, "entry_price") and self.entry_price:
+            if self.entry_price:
                 return_pct = ((current_close - self.entry_price) / self.entry_price) * 100
                 if return_pct <= -1.5:
                     stop_loss_triggered = True
@@ -175,7 +177,7 @@ class MaTrendStrategy(BaseStrategy):
                     )
 
             if macd_death_cross or stop_loss_triggered or take_profit_triggered:
-                logger.info("🔴 [%s] Trend Sell/Exit Triggered.", self.symbol)
+                logger.info("🔴 [%s] Production Trend Sell/Exit Triggered.", self.symbol)
                 signal = self.build_signal(
                     action="create",
                     market_type=self.market_type,
@@ -184,6 +186,7 @@ class MaTrendStrategy(BaseStrategy):
                     quantity=self.order_quantity,
                     client_order_id=client_id,
                 )
+                self.is_order_pending = True
                 signals.append(signal)
 
         return signals
@@ -193,12 +196,15 @@ class MaTrendStrategy(BaseStrategy):
         status = order.get("status")
         side = order.get("side")
 
+        if status in ("closed", "FILLED", "canceled", "rejected", "CANCELED", "REJECTED"):
+            self.is_order_pending = False
+
         if status in ("closed", "FILLED"):
             if side == "buy":
                 self.has_position = True
                 self.entry_price = float(order.get("price") or 0.0)
                 logger.info(
-                    "🛒 [%s] Position Opened. Cached Entry Price: %.4f",
+                    "🛒 [%s] Order Filled successfully: POSITION OPENED at %.4f",
                     self.symbol,
                     self.entry_price,
                 )
@@ -206,7 +212,7 @@ class MaTrendStrategy(BaseStrategy):
                 self.has_position = False
                 self.entry_price = None
                 logger.info(
-                    "💰 [%s] Position Closed. Reference baseline cleared.",
+                    "💰 [%s] Order Filled successfully: POSITION CLOSED",
                     self.symbol,
                 )
 

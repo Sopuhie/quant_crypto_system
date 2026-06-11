@@ -364,3 +364,11 @@
 2026-06-11 15:57:35 | ERROR    | __main__ | Order execution failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
 2026-06-11 15:57:40 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
 2026-06-11 15:57:40 | ERROR    | __main__ | Order execution failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:57:45 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:57:45 | ERROR    | __main__ | Order execution failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:57:51 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:57:51 | ERROR    | __main__ | Order execution failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:57:56 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:57:56 | ERROR    | __main__ | Order execution failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:52 | ERROR    | gateway.binance_client | Binance authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:52 | ERROR    | gateway.binance_client | Binance spot authentication failed: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}. Check secure_keys.json: use testnet keys when BINANCE_SANDBOX=true, ensure IP whitelist is open, and enable Reading permission.

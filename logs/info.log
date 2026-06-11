@@ -3032,3 +3032,103 @@ y...
 2026-06-11 15:57:40 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
 2026-06-11 15:57:40 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 4.2892, KDJ_J: 58.86
 2026-06-11 15:57:40 | INFO     | gateway.order_executor | Creating spot order: symbol=BTC/USDT side=buy type=market qty=0.0005 price=None client_id=cl_BTC_ShortTerm_Trend_1781164620000
+2026-06-11 15:57:45 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:57:45 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 4.2892, KDJ_J: 58.86
+2026-06-11 15:57:45 | INFO     | gateway.order_executor | Creating spot order: symbol=BTC/USDT side=buy type=market qty=0.0005 price=None client_id=cl_BTC_ShortTerm_Trend_1781164620000
+2026-06-11 15:57:50 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:57:51 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 4.2892, KDJ_J: 58.86
+2026-06-11 15:57:51 | INFO     | gateway.order_executor | Creating spot order: symbol=BTC/USDT side=buy type=market qty=0.0005 price=None client_id=cl_BTC_ShortTerm_Trend_1781164620000
+2026-06-11 15:57:56 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:57:56 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 4.2892, KDJ_J: 58.86
+2026-06-11 15:57:56 | INFO     | gateway.order_executor | Creating spot order: symbol=BTC/USDT side=buy type=market qty=0.0005 price=None client_id=cl_BTC_ShortTerm_Trend_1781164620000
+2026-06-11 15:58:01 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:06 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:12 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:17 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:22 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:27 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:33 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:38 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:43 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:48 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:54 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:58:59 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:04 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:09 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:15 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:20 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:25 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:30 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:36 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:41 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:46 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:51 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 15:59:57 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:02 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:07 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:12 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:18 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:23 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:28 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:33 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:39 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:44 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:49 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:00:55 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:00 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:05 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:10 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:15 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:21 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:26 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:31 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:37 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:42 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:47 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:52 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:01:57 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:03 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:08 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:13 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:19 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:24 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:29 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:34 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:40 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:45 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:50 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:02:55 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:01 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:06 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:11 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:16 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:22 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:27 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:32 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:37 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:43 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:44 | INFO     | __main__ | Shutting down quant trading system
+y...
+2026-06-11 16:03:44 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 16:03:44 | INFO     | SystemRunner | System terminated cleanly.
+2026-06-11 16:03:48 | INFO     | SystemRunner | Initializing Quant Crypto System Dual-Engine Launch...
+2026-06-11 16:03:48 | INFO     | SystemRunner | Launching Web Dashboard on Port 8000...
+2026-06-11 16:03:48 | INFO     | web.app | Web Dashboard Server running natively on http://127.0.0.1:8000
+2026-06-11 16:03:50 | INFO     | SystemRunner | Launching Core Quantitative Engine in SANDBOX Simulation Mode...
+2026-06-11 16:03:51 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 16:03:51 | INFO     | __main__ | Starting quant trading system (sandbox=True)
+2026-06-11 16:03:51 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 16:03:51 | INFO     | gateway.binance_client | Initializing Binance CCXT clients (sandbox=True)
+2026-06-11 16:03:52 | WARNING  | gateway.binance_client | Falling back to public market-data mode (no trading).
+2026-06-11 16:03:54 | INFO     | gateway.binance_client | Binance public market-data client initialized
+2026-06-11 16:03:54 | INFO     | __main__ | Syncing historical kline buffers for initialized strategies...
+2026-06-11 16:03:54 | INFO     | __main__ | Successfully synced 100 historical bars for BTC/USDT
+2026-06-11 16:03:54 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:54 | INFO     | strategies.base_strategy | Strategy started: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 16:03:54 | INFO     | strategies.ma_trend_strategy | Initializing historical state framework for BTC_ShortTerm_Trend
+2026-06-11 16:03:54 | INFO     | __main__ | System ready: strategies=1 symbols=('BTC/USDT', 'ETH/USDT') tick=5.0s mode=public-data-only
+2026-06-11 16:03:54 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:03:59 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:04:05 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:04:10 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:04:15 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
