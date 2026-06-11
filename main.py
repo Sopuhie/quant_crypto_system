@@ -73,6 +73,46 @@ class QuantTradingSystem:
                 "Binance credentials unavailable; running in offline simulation mode"
             )
 
+        # Sync historical bars to ensure indicator vectors are full on boot
+        logger.info("Syncing historical kline buffers for initialized strategies...")
+        for strategy in self.strategies:
+            try:
+                # Query historical matrix up to the config limit
+                rows = await asyncio.to_thread(
+                    self.client.spot.fetch_ohlcv,
+                    strategy.symbol,
+                    KLINE_INTERVAL,
+                    None,
+                    KLINE_LIMIT,
+                )
+                if rows:
+                    synced_count = 0
+                    for row in rows:
+                        ts, open_, high, low, close, volume = row
+                        kline_data = {
+                            "symbol": strategy.symbol,
+                            "interval": KLINE_INTERVAL,
+                            "open_time": ts,
+                            "open": open_,
+                            "high": high,
+                            "low": low,
+                            "close": close,
+                            "volume": volume,
+                        }
+                        await self._persist_kline(kline_data)
+                        synced_count += 1
+                    logger.info(
+                        "Successfully synced %s historical bars for %s",
+                        synced_count,
+                        strategy.symbol,
+                    )
+            except Exception as exc:
+                logger.warning(
+                    "Failed to warm up historical database buffer for %s: %s",
+                    strategy.symbol,
+                    exc,
+                )
+
         await self._refresh_equity()
         for strategy in self.strategies:
             await strategy.start()
