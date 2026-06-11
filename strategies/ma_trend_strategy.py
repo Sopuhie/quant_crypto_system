@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
+from pathlib import Path
 from typing import Any, Optional
 
 import pandas as pd
@@ -39,6 +40,7 @@ class MaTrendStrategy(BaseStrategy):
         self.k_period = self.params.get("k_period", 9)
         self.order_quantity = float(self.params.get("order_quantity", 0.001))
         self.market_type = self.params.get("market_type", "spot")
+        self.db_path = Path(self.params.get("db_path", DB_PATH))
 
         self.last_signal_time: Optional[int] = None
         self.has_position = False
@@ -56,7 +58,7 @@ class MaTrendStrategy(BaseStrategy):
     def _calculate_indicators(self) -> Optional[pd.DataFrame]:
         """Extracts data from the SQLite market sliding window to populate vector frames."""
         try:
-            conn = sqlite3.connect(DB_PATH)
+            conn = sqlite3.connect(self.db_path)
             query = """
                 SELECT open_time, open, high, low, close, volume
                 FROM market_kline

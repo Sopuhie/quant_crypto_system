@@ -3386,3 +3386,762 @@ y...
 2026-06-11 16:45:10 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
 2026-06-11 16:45:40 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
 2026-06-11 16:46:10 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:46:40 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:47:11 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:47:41 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:48:11 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:48:41 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:49:11 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:49:41 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:50:12 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:50:38 | INFO     | gateway.binance_client | Initializing Binance CCXT clients (sandbox=True)
+2026-06-11 16:50:39 | WARNING  | gateway.binance_client | Falling back to public market-data mode (no trading).
+2026-06-11 16:50:41 | INFO     | gateway.binance_client | Binance public market-data client initialized
+2026-06-11 16:50:42 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:50:46 | INFO     | gateway.binance_client | Initializing Binance CCXT clients (sandbox=True)
+2026-06-11 16:50:48 | WARNING  | gateway.binance_client | Falling back to public market-data mode (no trading).
+2026-06-11 16:50:49 | INFO     | gateway.binance_client | Binance public market-data client initialized
+2026-06-11 16:50:49 | INFO     | gateway.binance_client | Initializing Binance CCXT clients (sandbox=False)
+2026-06-11 16:51:10 | WARNING  | gateway.binance_client | Binance network error (attempt 1/3): binance GET https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1781167849516&recvWindow=10000&signature=a667abeb67f32760e33fc820ba2bfea93ab6cd145a2fa588f595ddcdd94c0b22
+2026-06-11 16:51:12 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:51:32 | WARNING  | gateway.binance_client | Binance network error (attempt 2/3): binance GET https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1781167871562&recvWindow=10000&signature=988c5cf1193f52b516fa6c112452dabc05aa3d9bac8c31cf2d72e08cf431d9b9
+2026-06-11 16:51:42 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:51:55 | WARNING  | gateway.binance_client | Binance network error (attempt 3/3): binance GET https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1781167894599&recvWindow=10000&signature=246935b6f6ba0f5c849d2a62b7c4b80a4d2ae75269bc21bb831f9f65d98d7d7d
+2026-06-11 16:52:12 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:52:42 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:53:13 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:53:34 | INFO     | gateway.binance_client | Initializing Binance CCXT clients (sandbox=False)
+2026-06-11 16:53:43 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:53:55 | WARNING  | gateway.binance_client | Binance network error (attempt 1/3): binance GET https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1781168014335&recvWindow=10000&signature=185432ef327396c3ee0fe7e5e4ddd0938a09b910d9e3198faf6e0a90b745be0f
+2026-06-11 16:54:13 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:54:17 | WARNING  | gateway.binance_client | Binance network error (attempt 2/3): binance GET https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1781168036423&recvWindow=10000&signature=bd1a6b1813150d7332124bcc3269f9a4eda7a3c0ce26fc178a99a2e8f187defb
+2026-06-11 16:54:40 | WARNING  | gateway.binance_client | Binance network error (attempt 3/3): binance GET https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1781168059496&recvWindow=10000&signature=a950c363a2854cc2b1d3f3fe2e8287621e801e42c862b66b8c79a32b99b95b8a
+2026-06-11 16:54:43 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:55:13 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:55:43 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:56:14 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:56:44 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:57:14 | WARNING  | __main__ | Unable to refresh equity for risk checks: binance {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2026-06-11 16:57:58 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 16:57:58 | INFO     | __main__ | Starting quant trading system (sandbox=False)
+2026-06-11 16:57:58 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 16:57:58 | INFO     | gateway.binance_client | Initializing Binance CCXT clients (sandbox=False)
+2026-06-11 16:58:19 | WARNING  | gateway.binance_client | Binance network error (attempt 1/3): binance GET https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1781168278167&recvWindow=10000&signature=55eb6f79bcae6efc48e5a4b07199840cf281dc7652e8bf15b9e6e63ccf27902b
+2026-06-11 16:58:41 | WARNING  | gateway.binance_client | Binance network error (attempt 2/3): binance GET https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1781168300234&recvWindow=10000&signature=2ca918af5f8a701c10ad582682c17d001274bfba7a94a7169e1245abd78dfe23
+2026-06-11 16:59:04 | WARNING  | gateway.binance_client | Binance network error (attempt 3/3): binance GET https://api.binance.com/sapi/v1/capital/config/getall?timestamp=1781168323316&recvWindow=10000&signature=747a6da7954a9afd454255d05d457459afdca3a6f94f9282a1a2212101881691
+2026-06-11 17:02:16 | INFO     | engine.backtester | Loaded 163 bars from D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db for BTC/USDT
+2026-06-11 17:02:16 | INFO     | strategies.base_strategy | Strategy started: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:02:16 | INFO     | strategies.ma_trend_strategy | Initializing historical state framework for BTC_ShortTerm_Trend
+2026-06-11 17:02:17 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:02:21 | INFO     | engine.backtester | Fetched 268 bars for BTC/USDT 1h (~7 days)
+2026-06-11 17:02:21 | INFO     | strategies.base_strategy | Strategy started: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:02:21 | INFO     | strategies.ma_trend_strategy | Initializing historical state framework for BTC_ShortTerm_Trend
+2026-06-11 17:02:22 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:06:18 | INFO     | engine.backtester | Loaded 163 bars from D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db for BTC/USDT
+2026-06-11 17:06:18 | INFO     | strategies.base_strategy | Strategy started: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:06:18 | INFO     | strategies.ma_trend_strategy | Initializing historical state framework for BTC_ShortTerm_Trend
+2026-06-11 17:06:18 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:07:09 | INFO     | engine.backtester | Fetched 820 bars for BTC/USDT 1h (~30 days)
+2026-06-11 17:07:09 | INFO     | strategies.base_strategy | Strategy started: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:07:09 | INFO     | strategies.ma_trend_strategy | Initializing historical state framework for BTC_ShortTerm_Trend
+2026-06-11 17:07:12 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:11:50 | INFO     | engine.backtester | Fetched 820 bars for BTC/USDT 1h (~30 days)
+2026-06-11 17:11:50 | INFO     | strategies.base_strategy | Strategy started: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:11:50 | INFO     | strategies.ma_trend_strategy | Initializing historical state framework for BTC_ShortTerm_Trend
+2026-06-11 17:11:50 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 8.6203, KDJ_J: 46.43
+2026-06-11 17:11:50 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 79809.1600
+2026-06-11 17:11:50 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:50 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:51 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 2.1756, KDJ_J: 46.85
+2026-06-11 17:11:51 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 79035.2600
+2026-06-11 17:11:51 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:51 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:51 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.0669, KDJ_J: 54.21
+2026-06-11 17:11:51 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78205.9600
+2026-06-11 17:11:51 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:51 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:51 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.2880, KDJ_J: 35.49
+2026-06-11 17:11:51 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76909.9200
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.4110, KDJ_J: 70.88
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76803.2800
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 32.0469, KDJ_J: 77.84
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78078.7200
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 11.0962, KDJ_J: 55.85
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77779.9800
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:52 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 19.1495, KDJ_J: 67.39
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 75537.7200
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.9360, KDJ_J: 64.74
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77628.8200
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 16.6188, KDJ_J: 75.43
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77132.5000
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:53 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:54 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 7.5022, KDJ_J: 53.05
+2026-06-11 17:11:54 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 73518.0100
+2026-06-11 17:11:54 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:54 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:54 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 21.1911, KDJ_J: 59.78
+2026-06-11 17:11:54 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 74056.5000
+2026-06-11 17:11:55 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:55 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:55 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 7.2568, KDJ_J: 64.98
+2026-06-11 17:11:55 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 73292.9200
+2026-06-11 17:11:55 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:55 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 8.6497, KDJ_J: 36.08
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67330.0100
+2026-06-11 17:11:56 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -1.86%
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 24.8931, KDJ_J: 76.47
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 63266.0000
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 34.0489, KDJ_J: 42.69
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 64230.0000
+2026-06-11 17:11:56 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -2.51%
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 53.9886, KDJ_J: 52.10
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62329.3500
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.6145, KDJ_J: 68.54
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62536.8700
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 53.8544, KDJ_J: 43.95
+2026-06-11 17:11:56 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 60786.9600
+2026-06-11 17:11:57 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 3.40%
+2026-06-11 17:11:57 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:57 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:57 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 65.2710, KDJ_J: 71.36
+2026-06-11 17:11:57 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 63631.4200
+2026-06-11 17:11:57 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:57 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:58 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 18.9740, KDJ_J: 57.98
+2026-06-11 17:11:58 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 61261.5500
+2026-06-11 17:11:58 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:11:58 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:11:58 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.2707, KDJ_J: 26.68
+2026-06-11 17:11:58 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62206.0100
+2026-06-11 17:11:58 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:12:00 | INFO     | engine.backtester | Fetched 2260 bars for BTC/USDT 1h (~90 days)
+2026-06-11 17:12:00 | INFO     | strategies.base_strategy | Strategy started: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:12:00 | INFO     | strategies.ma_trend_strategy | Initializing historical state framework for BTC_ShortTerm_Trend
+2026-06-11 17:12:01 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 4.4826, KDJ_J: 50.51
+2026-06-11 17:12:01 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 70700.0000
+2026-06-11 17:12:01 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:01 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:01 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 131.9504, KDJ_J: 75.07
+2026-06-11 17:12:01 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 73835.6200
+2026-06-11 17:12:01 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:01 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 22.1042, KDJ_J: 62.88
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 70822.0700
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 1.7323, KDJ_J: 39.34
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 70133.7200
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 25.7309, KDJ_J: 57.07
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 69821.2100
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:02 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:03 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.5346, KDJ_J: 67.62
+2026-06-11 17:12:03 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 68805.5800
+2026-06-11 17:12:03 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:03 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:03 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.9962, KDJ_J: 58.39
+2026-06-11 17:12:03 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 68074.6000
+2026-06-11 17:12:03 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 3.01%
+2026-06-11 17:12:03 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:03 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:04 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 89.5966, KDJ_J: 71.77
+2026-06-11 17:12:04 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 71345.9100
+2026-06-11 17:12:04 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:04 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:04 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 36.9030, KDJ_J: 71.00
+2026-06-11 17:12:04 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 68903.5900
+2026-06-11 17:12:04 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -1.75%
+2026-06-11 17:12:04 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:04 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:04 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 20.3266, KDJ_J: 53.69
+2026-06-11 17:12:04 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 66407.2800
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 3.5344, KDJ_J: 37.21
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 66849.8800
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 92.0669, KDJ_J: 74.49
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67529.5200
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.8374, KDJ_J: 75.49
+2026-06-11 17:12:05 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67526.7500
+2026-06-11 17:12:06 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:06 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:06 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 29.9517, KDJ_J: 55.07
+2026-06-11 17:12:06 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67042.0800
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 35.0100, KDJ_J: 56.70
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67413.7800
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 3.43%
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 83.3681, KDJ_J: 55.43
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 69770.8800
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 11.1048, KDJ_J: 67.40
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 69799.1400
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:07 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:08 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 6.6643, KDJ_J: 75.79
+2026-06-11 17:12:08 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 71600.0100
+2026-06-11 17:12:08 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:08 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:08 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 35.2316, KDJ_J: 74.38
+2026-06-11 17:12:08 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 72080.8700
+2026-06-11 17:12:08 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:08 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:09 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.3433, KDJ_J: 61.94
+2026-06-11 17:12:09 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 71335.4300
+2026-06-11 17:12:09 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 4.61%
+2026-06-11 17:12:09 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:09 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:10 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 88.8512, KDJ_J: 79.86
+2026-06-11 17:12:10 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 74809.9900
+2026-06-11 17:12:10 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:10 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:10 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 1.7930, KDJ_J: 72.07
+2026-06-11 17:12:10 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 75780.3800
+2026-06-11 17:12:11 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:11 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:11 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 2.4484, KDJ_J: 69.72
+2026-06-11 17:12:11 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 75571.6000
+2026-06-11 17:12:11 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:11 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:11 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 97.9886, KDJ_J: 69.12
+2026-06-11 17:12:11 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 75027.2600
+2026-06-11 17:12:12 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:12 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:12 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 20.6883, KDJ_J: 77.29
+2026-06-11 17:12:12 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76362.7700
+2026-06-11 17:12:12 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:12 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:12 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 3.0599, KDJ_J: 69.35
+2026-06-11 17:12:12 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78257.4800
+2026-06-11 17:12:12 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:12 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:13 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.0473, KDJ_J: 77.01
+2026-06-11 17:12:13 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77714.5500
+2026-06-11 17:12:13 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:13 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:13 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.8326, KDJ_J: 73.35
+2026-06-11 17:12:13 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77625.0000
+2026-06-11 17:12:13 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:13 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 10.2332, KDJ_J: 28.51
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76858.5900
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 13.4045, KDJ_J: 72.98
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76463.9500
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 17.9205, KDJ_J: 56.30
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76058.1700
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 3.52%
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:14 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 37.8063, KDJ_J: 56.19
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78568.5700
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 49.0858, KDJ_J: 64.21
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 80173.3000
+2026-06-11 17:12:15 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -1.54%
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 27.5467, KDJ_J: 76.33
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 80067.2300
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.8818, KDJ_J: 48.55
+2026-06-11 17:12:15 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 80554.6800
+2026-06-11 17:12:16 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:16 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:16 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.2137, KDJ_J: 53.16
+2026-06-11 17:12:16 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 81279.4100
+2026-06-11 17:12:16 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:16 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:16 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 12.1823, KDJ_J: 51.20
+2026-06-11 17:12:16 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 79886.0100
+2026-06-11 17:12:17 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:17 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:17 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 28.2773, KDJ_J: 65.68
+2026-06-11 17:12:17 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 82210.0700
+2026-06-11 17:12:17 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -1.79%
+2026-06-11 17:12:17 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:17 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:18 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 8.6203, KDJ_J: 46.43
+2026-06-11 17:12:18 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 79809.1600
+2026-06-11 17:12:18 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:18 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:19 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 2.1756, KDJ_J: 46.85
+2026-06-11 17:12:19 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 79035.2600
+2026-06-11 17:12:19 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:19 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:19 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.0669, KDJ_J: 54.21
+2026-06-11 17:12:19 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78205.9600
+2026-06-11 17:12:19 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:19 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:19 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.2880, KDJ_J: 35.49
+2026-06-11 17:12:19 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76909.9200
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.4110, KDJ_J: 70.88
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76803.2800
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 32.0469, KDJ_J: 77.84
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78078.7200
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 11.0962, KDJ_J: 55.85
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77779.9800
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:20 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:21 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 19.1495, KDJ_J: 67.39
+2026-06-11 17:12:21 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 75537.7200
+2026-06-11 17:12:21 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:21 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:22 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.9360, KDJ_J: 64.74
+2026-06-11 17:12:22 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77628.8200
+2026-06-11 17:12:22 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:22 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:22 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 16.6188, KDJ_J: 75.43
+2026-06-11 17:12:22 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77132.5000
+2026-06-11 17:12:22 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:22 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:23 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 7.5022, KDJ_J: 53.05
+2026-06-11 17:12:23 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 73518.0100
+2026-06-11 17:12:23 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:23 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:23 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 21.1911, KDJ_J: 59.78
+2026-06-11 17:12:23 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 74056.5000
+2026-06-11 17:12:23 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:23 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:24 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 7.2568, KDJ_J: 64.98
+2026-06-11 17:12:24 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 73292.9200
+2026-06-11 17:12:24 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:24 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:24 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 8.6497, KDJ_J: 36.08
+2026-06-11 17:12:24 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67330.0100
+2026-06-11 17:12:24 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -1.86%
+2026-06-11 17:12:24 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:24 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 24.8931, KDJ_J: 76.47
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 63266.0000
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 34.0489, KDJ_J: 42.69
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 64230.0000
+2026-06-11 17:12:25 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -2.51%
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 53.9886, KDJ_J: 52.10
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62329.3500
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.6145, KDJ_J: 68.54
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62536.8700
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 53.8544, KDJ_J: 43.95
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 60786.9600
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 3.40%
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:25 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:26 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 65.2710, KDJ_J: 71.36
+2026-06-11 17:12:26 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 63631.4200
+2026-06-11 17:12:26 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:26 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:26 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 18.9740, KDJ_J: 57.98
+2026-06-11 17:12:26 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 61261.5500
+2026-06-11 17:12:26 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:12:26 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:12:27 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.2707, KDJ_J: 26.68
+2026-06-11 17:12:27 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62206.0100
+2026-06-11 17:12:27 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:15:46 | INFO     | engine.backtester | Fetched 820 bars for BTC/USDT 1h (~30 days)
+2026-06-11 17:15:46 | INFO     | strategies.base_strategy | Strategy started: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:15:46 | INFO     | strategies.ma_trend_strategy | Initializing historical state framework for BTC_ShortTerm_Trend
+2026-06-11 17:15:47 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 8.6203, KDJ_J: 46.43
+2026-06-11 17:15:47 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 79809.1600
+2026-06-11 17:15:47 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:47 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:47 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 2.1756, KDJ_J: 46.85
+2026-06-11 17:15:47 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 79035.2600
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.0669, KDJ_J: 54.21
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78205.9600
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.2880, KDJ_J: 35.49
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76909.9200
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.4110, KDJ_J: 70.88
+2026-06-11 17:15:48 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76803.2800
+2026-06-11 17:15:49 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:49 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:49 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 32.0469, KDJ_J: 77.84
+2026-06-11 17:15:49 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78078.7200
+2026-06-11 17:15:49 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:49 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:49 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 11.0962, KDJ_J: 55.85
+2026-06-11 17:15:49 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77779.9800
+2026-06-11 17:15:49 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:49 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 19.1495, KDJ_J: 67.39
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 75537.7200
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.9360, KDJ_J: 64.74
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77628.8200
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 16.6188, KDJ_J: 75.43
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77132.5000
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:50 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:51 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 7.5022, KDJ_J: 53.05
+2026-06-11 17:15:51 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 73518.0100
+2026-06-11 17:15:51 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:51 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:51 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 21.1911, KDJ_J: 59.78
+2026-06-11 17:15:51 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 74056.5000
+2026-06-11 17:15:52 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:52 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:52 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 7.2568, KDJ_J: 64.98
+2026-06-11 17:15:52 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 73292.9200
+2026-06-11 17:15:52 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:52 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 8.6497, KDJ_J: 36.08
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67330.0100
+2026-06-11 17:15:53 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -1.86%
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 24.8931, KDJ_J: 76.47
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 63266.0000
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 34.0489, KDJ_J: 42.69
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 64230.0000
+2026-06-11 17:15:53 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -2.51%
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 53.9886, KDJ_J: 52.10
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62329.3500
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.6145, KDJ_J: 68.54
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62536.8700
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 53.8544, KDJ_J: 43.95
+2026-06-11 17:15:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 60786.9600
+2026-06-11 17:15:54 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 3.40%
+2026-06-11 17:15:54 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:54 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:54 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 65.2710, KDJ_J: 71.36
+2026-06-11 17:15:54 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 63631.4200
+2026-06-11 17:15:54 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:54 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:54 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 18.9740, KDJ_J: 57.98
+2026-06-11 17:15:54 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 61261.5500
+2026-06-11 17:15:55 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:15:55 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:15:55 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.2707, KDJ_J: 26.68
+2026-06-11 17:15:55 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62206.0100
+2026-06-11 17:15:55 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:16:34 | INFO     | engine.backtester | Fetched 2260 bars for BTC/USDT 1h (~90 days)
+2026-06-11 17:16:34 | INFO     | strategies.base_strategy | Strategy started: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:16:34 | INFO     | strategies.ma_trend_strategy | Initializing historical state framework for BTC_ShortTerm_Trend
+2026-06-11 17:16:34 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 4.4826, KDJ_J: 50.51
+2026-06-11 17:16:34 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 70700.0000
+2026-06-11 17:16:34 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:34 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 131.9504, KDJ_J: 75.07
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 73835.6200
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 22.1042, KDJ_J: 62.88
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 70822.0700
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 1.7323, KDJ_J: 39.34
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 70133.7200
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:35 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:36 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 25.7309, KDJ_J: 57.07
+2026-06-11 17:16:36 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 69821.2100
+2026-06-11 17:16:36 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:36 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:36 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.5346, KDJ_J: 67.62
+2026-06-11 17:16:36 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 68805.5800
+2026-06-11 17:16:36 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:36 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:36 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.9962, KDJ_J: 58.39
+2026-06-11 17:16:36 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 68074.6000
+2026-06-11 17:16:37 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 3.01%
+2026-06-11 17:16:37 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:37 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:37 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 89.5966, KDJ_J: 71.77
+2026-06-11 17:16:37 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 71345.9100
+2026-06-11 17:16:37 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:37 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 36.9030, KDJ_J: 71.00
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 68903.5900
+2026-06-11 17:16:38 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -1.75%
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 20.3266, KDJ_J: 53.69
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 66407.2800
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 3.5344, KDJ_J: 37.21
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 66849.8800
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:38 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:39 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 92.0669, KDJ_J: 74.49
+2026-06-11 17:16:39 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67529.5200
+2026-06-11 17:16:39 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:39 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:39 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.8374, KDJ_J: 75.49
+2026-06-11 17:16:39 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67526.7500
+2026-06-11 17:16:39 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:39 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 29.9517, KDJ_J: 55.07
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67042.0800
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 35.0100, KDJ_J: 56.70
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67413.7800
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 3.43%
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 83.3681, KDJ_J: 55.43
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 69770.8800
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:40 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 11.1048, KDJ_J: 67.40
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 69799.1400
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 6.6643, KDJ_J: 75.79
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 71600.0100
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 35.2316, KDJ_J: 74.38
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 72080.8700
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:41 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:43 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.3433, KDJ_J: 61.94
+2026-06-11 17:16:43 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 71335.4300
+2026-06-11 17:16:43 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 4.61%
+2026-06-11 17:16:43 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:43 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:44 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 88.8512, KDJ_J: 79.86
+2026-06-11 17:16:44 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 74809.9900
+2026-06-11 17:16:44 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:44 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:44 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 1.7930, KDJ_J: 72.07
+2026-06-11 17:16:44 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 75780.3800
+2026-06-11 17:16:44 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:44 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 2.4484, KDJ_J: 69.72
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 75571.6000
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 97.9886, KDJ_J: 69.12
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 75027.2600
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 20.6883, KDJ_J: 77.29
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76362.7700
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:45 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:46 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 3.0599, KDJ_J: 69.35
+2026-06-11 17:16:46 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78257.4800
+2026-06-11 17:16:46 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:46 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.0473, KDJ_J: 77.01
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77714.5500
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.8326, KDJ_J: 73.35
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77625.0000
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 10.2332, KDJ_J: 28.51
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76858.5900
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:47 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:48 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 13.4045, KDJ_J: 72.98
+2026-06-11 17:16:48 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76463.9500
+2026-06-11 17:16:48 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:48 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:48 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 17.9205, KDJ_J: 56.30
+2026-06-11 17:16:48 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76058.1700
+2026-06-11 17:16:48 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 3.52%
+2026-06-11 17:16:48 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:48 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 37.8063, KDJ_J: 56.19
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78568.5700
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 49.0858, KDJ_J: 64.21
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 80173.3000
+2026-06-11 17:16:49 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -1.54%
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 27.5467, KDJ_J: 76.33
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 80067.2300
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.8818, KDJ_J: 48.55
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 80554.6800
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.2137, KDJ_J: 53.16
+2026-06-11 17:16:49 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 81279.4100
+2026-06-11 17:16:50 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:50 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:50 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 12.1823, KDJ_J: 51.20
+2026-06-11 17:16:50 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 79886.0100
+2026-06-11 17:16:51 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:51 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:51 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 28.2773, KDJ_J: 65.68
+2026-06-11 17:16:51 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 82210.0700
+2026-06-11 17:16:51 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -1.79%
+2026-06-11 17:16:51 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:51 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:52 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 8.6203, KDJ_J: 46.43
+2026-06-11 17:16:52 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 79809.1600
+2026-06-11 17:16:52 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:52 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:52 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 2.1756, KDJ_J: 46.85
+2026-06-11 17:16:52 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 79035.2600
+2026-06-11 17:16:52 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:52 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.0669, KDJ_J: 54.21
+2026-06-11 17:16:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78205.9600
+2026-06-11 17:16:53 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:53 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:53 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.2880, KDJ_J: 35.49
+2026-06-11 17:16:53 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76909.9200
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 5.4110, KDJ_J: 70.88
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 76803.2800
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 32.0469, KDJ_J: 77.84
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 78078.7200
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 11.0962, KDJ_J: 55.85
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77779.9800
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:54 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:55 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 19.1495, KDJ_J: 67.39
+2026-06-11 17:16:55 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 75537.7200
+2026-06-11 17:16:55 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:55 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:55 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.9360, KDJ_J: 64.74
+2026-06-11 17:16:55 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77628.8200
+2026-06-11 17:16:55 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:55 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:56 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 16.6188, KDJ_J: 75.43
+2026-06-11 17:16:56 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 77132.5000
+2026-06-11 17:16:56 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:56 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:56 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 7.5022, KDJ_J: 53.05
+2026-06-11 17:16:56 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 73518.0100
+2026-06-11 17:16:56 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:56 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:56 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 21.1911, KDJ_J: 59.78
+2026-06-11 17:16:56 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 74056.5000
+2026-06-11 17:16:57 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:57 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:57 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 7.2568, KDJ_J: 64.98
+2026-06-11 17:16:57 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 73292.9200
+2026-06-11 17:16:57 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:57 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 8.6497, KDJ_J: 36.08
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 67330.0100
+2026-06-11 17:16:58 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -1.86%
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 24.8931, KDJ_J: 76.47
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 63266.0000
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 34.0489, KDJ_J: 42.69
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 64230.0000
+2026-06-11 17:16:58 | WARNING  | strategies.ma_trend_strategy | 🚨 [BTC/USDT] Hard Stop Loss Triggered! Return: -2.51%
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 53.9886, KDJ_J: 52.10
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62329.3500
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 9.6145, KDJ_J: 68.54
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62536.8700
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:58 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:59 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 53.8544, KDJ_J: 43.95
+2026-06-11 17:16:59 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 60786.9600
+2026-06-11 17:16:59 | INFO     | strategies.ma_trend_strategy | 🎯 [BTC/USDT] Take Profit Target Met! Return: 3.40%
+2026-06-11 17:16:59 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:59 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:16:59 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 65.2710, KDJ_J: 71.36
+2026-06-11 17:16:59 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 63631.4200
+2026-06-11 17:16:59 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:16:59 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:17:00 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 18.9740, KDJ_J: 57.98
+2026-06-11 17:17:00 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 61261.5500
+2026-06-11 17:17:00 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:17:00 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:17:00 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 0.2707, KDJ_J: 26.68
+2026-06-11 17:17:00 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62206.0100
+2026-06-11 17:17:00 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:17:40 | INFO     | engine.backtester | Loaded 163 bars from D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db for BTC/USDT
+2026-06-11 17:17:40 | INFO     | strategies.base_strategy | Strategy started: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:17:40 | INFO     | strategies.ma_trend_strategy | Initializing historical state framework for BTC_ShortTerm_Trend
+2026-06-11 17:17:40 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 3.1237, KDJ_J: -0.11
+2026-06-11 17:17:40 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62729.2200
+2026-06-11 17:17:40 | INFO     | strategies.ma_trend_strategy | 🔴 [BTC/USDT] Production Trend Sell/Exit Triggered.
+2026-06-11 17:17:40 | INFO     | strategies.ma_trend_strategy | 💰 [BTC/USDT] Order Filled successfully: POSITION CLOSED
+2026-06-11 17:17:40 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 1.2830, KDJ_J: 68.23
+2026-06-11 17:17:40 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62922.9400
+2026-06-11 17:17:41 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
