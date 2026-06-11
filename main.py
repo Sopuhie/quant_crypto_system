@@ -1,4 +1,4 @@
-"""System bootstrapper and main asynchronous trading loop."""
+"""System bootstrapper and main asynchronous trading loop with live WebSocket stream."""
 
 from __future__ import annotations
 
@@ -7,6 +7,8 @@ import asyncio
 import json
 import signal
 from typing import Any, Optional
+
+import ccxt.pro as ccxtpro
 
 from config.settings import (
     DB_PATH,
@@ -49,11 +51,13 @@ class QuantTradingSystem:
         self._running = False
         self._active = False
         self._shutdown_event = asyncio.Event()
+        self._ws_tasks: list[asyncio.Task[None]] = []
 
         self.db = DatabaseConnection(DB_PATH)
         api_key, api_secret = load_binance_credentials()
         self.client = BinanceClient(api_key, api_secret, sandbox=self.sandbox)
         self.executor = OrderExecutor(self.client)
+        self.ws_client = self._build_ws_client()
         self.risk = RiskController(
             RiskConfig(
                 max_leverage=MAX_LEVERAGE,
@@ -63,6 +67,21 @@ class QuantTradingSystem:
                 symbol_whitelist=SYMBOL_WHITELIST,
             )
         )
+
+    def _build_ws_client(self) -> ccxtpro.binance:
+        api_key, api_secret = load_binance_credentials()
+        config: dict[str, Any] = {
+            "enableRateLimit": True,
+            "options": {"defaultType": "spot"},
+        }
+        if api_key and api_secret:
+            config["apiKey"] = api_key
+            config["secret"] = api_secret
+
+        exchange = ccxtpro.binance(config)
+        if self.sandbox and api_key and api_secret:
+            exchange.set_sandbox_mode(True)
+        return exchange
 
     async def startup(self) -> None:
         logger.info("Starting quant trading system (sandbox=%s)", self.sandbox)
@@ -124,6 +143,49 @@ class QuantTradingSystem:
             "public-data-only" if self.client.public_only else "full-trading",
         )
 
+        for strategy in self.strategies:
+            task = asyncio.create_task(
+                self._websocket_market_stream(strategy),
+                name=f"ws-{strategy.symbol}",
+            )
+            self._ws_tasks.append(task)
+
+    async def _websocket_market_stream(self, strategy: BaseStrategy) -> None:
+        """Consume live candles via CCXT Pro WebSocket and drive strategy evaluation."""
+        logger.info("WebSocket stream activated for symbol %s", strategy.symbol)
+        while self._running:
+            try:
+                ohlcv = await self.ws_client.watch_ohlcv(strategy.symbol, KLINE_INTERVAL)
+                if not ohlcv:
+                    continue
+
+                ts, open_, high, low, close, volume = ohlcv[-1]
+                kline = {
+                    "symbol": strategy.symbol,
+                    "interval": KLINE_INTERVAL,
+                    "open_time": ts,
+                    "open": open_,
+                    "high": high,
+                    "low": low,
+                    "close": close,
+                    "volume": volume,
+                }
+
+                await self._persist_kline(kline)
+
+                if self.risk.circuit_breaker_tripped:
+                    logger.error("Circuit breaker active; skipping strategy execution")
+                    continue
+
+                kline_signals = await strategy.on_kline_update(kline)
+                if kline_signals:
+                    await self._dispatch_signals(strategy, kline_signals)
+            except asyncio.CancelledError:
+                raise
+            except Exception as exc:
+                logger.error("WebSocket stream error on %s: %s", strategy.symbol, exc)
+                await asyncio.sleep(5)
+
     @property
     def is_running(self) -> bool:
         return self._running and self._active
@@ -149,6 +211,12 @@ class QuantTradingSystem:
         self._active = False
         logger.info("Shutting down quant trading system")
 
+        for task in self._ws_tasks:
+            task.cancel()
+        if self._ws_tasks:
+            await asyncio.gather(*self._ws_tasks, return_exceptions=True)
+        await self.ws_client.close()
+
         for strategy in self.strategies:
             await strategy.stop()
 
@@ -166,34 +234,6 @@ class QuantTradingSystem:
             logger.debug("Equity snapshot updated: USDT=%.4f", total_usdt)
         except Exception as exc:
             logger.warning("Unable to refresh equity for risk checks: %s", exc)
-
-    async def _fetch_latest_kline(self, symbol: str) -> Optional[dict[str, Any]]:
-        try:
-            rows = await asyncio.to_thread(
-                self.client.spot.fetch_ohlcv,
-                symbol,
-                KLINE_INTERVAL,
-                None,
-                1,
-            )
-        except Exception as exc:
-            logger.warning("Failed to fetch kline for %s: %s", symbol, exc)
-            return None
-
-        if not rows:
-            return None
-
-        ts, open_, high, low, close, volume = rows[-1]
-        return {
-            "symbol": symbol,
-            "interval": KLINE_INTERVAL,
-            "open_time": ts,
-            "open": open_,
-            "high": high,
-            "low": low,
-            "close": close,
-            "volume": volume,
-        }
 
     async def _persist_kline(self, kline: dict[str, Any]) -> None:
         with self.db.transaction() as conn:
@@ -311,34 +351,17 @@ class QuantTradingSystem:
                     }
                 )
 
-    async def _run_strategy_cycle(self, strategy: BaseStrategy) -> None:
-        if not strategy.is_running:
-            return
-
-        tick_signals = await strategy.on_tick()
-        if tick_signals:
-            await self._dispatch_signals(strategy, tick_signals)
-
-        kline = await self._fetch_latest_kline(strategy.symbol)
-        if kline is None:
-            return
-
-        await self._persist_kline(kline)
-        kline_signals = await strategy.on_kline_update(kline)
-        if kline_signals:
-            await self._dispatch_signals(strategy, kline_signals)
-
     async def run(self) -> None:
         await self.startup()
         try:
             while self._running:
                 await self._refresh_equity()
 
-                if self.risk.circuit_breaker_tripped:
-                    logger.error("Circuit breaker active; skipping strategy cycle")
-                else:
+                if not self.risk.circuit_breaker_tripped:
                     for strategy in self.strategies:
-                        await self._run_strategy_cycle(strategy)
+                        tick_signals = await strategy.on_tick()
+                        if tick_signals:
+                            await self._dispatch_signals(strategy, tick_signals)
 
                 try:
                     await asyncio.wait_for(

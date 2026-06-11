@@ -1,243 +1,440 @@
-# ================================================================================
-CURSOR IMPLEMENTATION GUIDE: OPTIMIZING LIVE SIGNAL MATCHING AND POSITION SNAPSHOTS
-
+================================================================================
+CURSOR IMPLEMENTATION GUIDE: TRANSITIONING TO PRODUCTION-READY WEBSOCKETS
 Target Environment: macOS (Single-User Lightweight Edition)
 Core Task:
-Review the newly uploaded code repository to ensure the recovery of production logic and risk protection constraints in strategies/ma_trend_strategy.py was executed accurately. Implement necessary tracking updates to prevent potential signal-locking and local position out-of-sync bugs.
+Review the latest repository upload and implement the next critical architectural upgrade. We will transition the market data ingest layer from polling REST API endpoints to a persistent, low-latency, asynchronous WebSocket Stream using CCXT Pro. This keeps the engine real-time and prevents Binance API rate-limiting blocks.
 
----
+CODEBASE REVIEWS AND AUDIT REPORT
+Audit Status:
+The safety lock logic (self_is_order_pending) has been integrated flawlessly into strategies/ma_trend_strategy.py. Order tracking and multi-order loop shielding are now complete.
 
-## CODEBASE REVIEWS AND AUDIT REPORT
+Architectural Efficiency Bottleneck (REST Rate Limits):
+Currently, main.py uses _fetch_latest_kline inside an infinite loop that runs every few seconds, hitting the fetch_ohlcv REST endpoint repeatedly.
+While this works perfectly for sandbox testing, running multiple strategies or symbols on a live account via REST polling will quickly trigger an HTTP 429 (Rate Limit Exceeded) error from Binance. To fix this, we will introduce a dedicated WebSocket background task using ccxt.pro.
 
-1. Recovery Status:
-The strategy has successfully discarded the mock override and restored the vectorized MACD cross and KDJ slope formulas. The defensive take-profit (3.0%) and stop-loss (-1.5%) rules based on dynamic entry price anchoring are properly bound.
-2. High-Risk Vulnerability Spotted (Local State Tracking Bug):
-In strategies/ma_trend_strategy.py, when a sell signal triggers due to a MACD death cross, stop loss, or take profit, the strategy emits a SELL signal object. However, the local Boolean tracker `self.has_position` remains set to `True` until the order is successfully filled and acknowledged via the `on_order_status` handler.
-Because the main engine loop executes every 5 seconds (`TICK_INTERVAL_SEC=5`) and a 1-minute candle takes 60 seconds to roll over, the `on_kline_update` hook will evaluate the *same* closed candle multiple times during that minute.
-If a sell order is currently pending execution on the exchange, the next loop cycle will see `self.has_position` is still `True`, calculate that the risk targets are still breached, and continuously spam duplicate SELL orders. This will violate your pre-trade risk rate limits (`MAX_ORDERS_PER_MINUTE`) and lock the engine.
-
----
-
-## MODIFIED FILE: FIXING SIGNAL SPAMMING LOCK IN STRATEGIES/MA_TREND_STRATEGY.PY
-Path: strategies/ma_trend_strategy.py
-
+MODIFIED FILE: OVERHAULING MAIN.PY WITH LIVE WEBSOCKET INGEST
+Path: main.py
 Action Required:
-Introduce an explicit signal locking variable `self.is_order_pending` to intercept repetitive event loops while an order is inflight to the exchange gateway. Update both `on_kline_update` and `on_order_status` to toggle this safety lock.
+Modify main.py to spin up an active background coroutine task using watch_ohlcv or watch_ticker. For our MACD/KDJ candle-based strategy, we will create an asynchronous live pipeline that receives real-time closing bars via WebSockets, updates the SQLite database, and feeds them right into the strategy engine instantly.
 
-Replacement Code for strategies/ma_trend_strategy.py:
+Replacement Content for main.py:
 
-"""Short-term trend-following strategy using MACD and KDJ indicators via SQLite cache."""
+"""System bootstrapper and main asynchronous trading loop with live WebSocket stream."""
 
-from **future** import annotations
+from future import annotations
 
+import argparse
+import asyncio
 import json
-import sqlite3
+import signal
+import sys
 from typing import Any, Optional
 
-import pandas as pd
+import ccxt.pro as ccxtpro
 
-from config.settings import DB_PATH
+from config.settings import (
+BINANCE_SANDBOX,
+DB_PATH,
+KLINE_INTERVAL,
+KLINE_LIMIT,
+LOG_DIR,
+MAX_DAILY_DRAWDOWN_PCT,
+MAX_LEVERAGE,
+MAX_ORDER_NOTIONAL_USD,
+MAX_ORDERS_PER_MINUTE,
+SYMBOL_WHITELIST,
+TICK_INTERVAL_SEC,
+)
+from database.connection import DatabaseConnection
+from engine.risk_controller import RiskConfig, RiskController, RiskViolation
+from gateway.binance_client import AuthenticationError, BinanceClient
+from gateway.order_executor import OrderExecutor
 from strategies.base_strategy import BaseStrategy
-from utils.logger import get_logger
+from strategies.ma_trend_strategy import MaTrendStrategy
+from utils.logger import get_logger, setup_logging
 
-logger = get_logger(**name**)
+logger = get_logger(name)
 
-class MaTrendStrategy(BaseStrategy):
-"""
-MACD & KDJ Short-term Trend Strategy.
-
-```
-Logic:
-- Calculates MACD and KDJ from historical Klines cached in SQLite.
-- Buy (Long) Signal: MACD Golden Cross (Histogram turns positive) AND KDJ J-line slope is upward.
-- Sell (Short/Exit) Signal: MACD Death Cross (Histogram turns negative) OR Position open limit exit.
-"""
+class QuantTradingSystem:
+"""Wire database, gateway, risk control, and strategies into an async WebSocket stream."""
 
 def __init__(
     self,
-    name: str,
-    symbol: str,
-    params: Optional[dict[str, Any]] = None,
+    strategies: list[BaseStrategy],
+    *,
+    sandbox: bool = BINANCE_SANDBOX,
+    tick_interval: float = TICK_INTERVAL_SEC,
 ) -> None:
-    super().__init__(name, symbol, params)
-    # Strategy localized definitions with clean defaults
-    self.fast_period = self.params.get("fast_period", 12)
-    self.slow_period = self.params.get("slow_period", 26)
-    self.signal_period = self.params.get("signal_period", 9)
-    self.k_period = self.params.get("k_period", 9)
-    self.order_quantity = float(self.params.get("order_quantity", 0.001))
-    self.market_type = self.params.get("market_type", "spot")
+    self.strategies = strategies
+    self.sandbox = sandbox
+    self.tick_interval = tick_interval
+    self._running = False
+    self._active = False
+    self._shutdown_event = asyncio.Event()
+    self._ws_tasks: list[asyncio.Task] = []
 
-    self.last_signal_time: Optional[int] = None
-    self.has_position = False
-    self.entry_price: Optional[float] = None
-    self.is_order_pending = False  # Inflight safety lock to prevent order duplication
+    self.db = DatabaseConnection(DB_PATH)
+    self.client = BinanceClient(sandbox=sandbox)
+    self.executor = OrderExecutor(self.client)
+    self.risk = RiskController(
+        RiskConfig(
+            max_leverage=MAX_LEVERAGE,
+            max_daily_drawdown_pct=MAX_DAILY_DRAWDOWN_PCT,
+            max_order_notional_usd=MAX_ORDER_NOTIONAL_USD,
+            max_orders_per_minute=MAX_ORDERS_PER_MINUTE,
+            symbol_whitelist=SYMBOL_WHITELIST,
+        )
+    )
 
-async def start(self) -> None:
-    """Executed on bootstrapper launch; pulls target constraints if required."""
-    await super().start()
-    logger.info("Initializing historical state framework for %s", self.name)
+    # Initialize CCXT Pro client for WebSocket connections
+    config = {
+        "enableRateLimit": True,
+        "options": {"defaultType": "spot"},
+    }
+    self.ws_client = ccxtpro.binance(config)
+    if sandbox:
+        self.ws_client.set_sandbox_mode(True)
 
-async def stop(self) -> None:
-    await super().stop()
+async def startup(self) -> None:
+    logger.info("Starting quant trading system (sandbox=%s)", self.sandbox)
+    self.db.initialize_schema()
 
-def _calculate_indicators(self) -> Optional[pd.DataFrame]:
-    """Extracts data from the SQLite market sliding window to populate vector frames."""
     try:
-        conn = sqlite3.connect(DB_PATH)
-        query = """
-            SELECT open_time, open, high, low, close, volume
-            FROM market_kline
-            WHERE symbol = ?
-            ORDER BY open_time DESC LIMIT 100
-        """
-        df = pd.read_sql_query(query, conn, params=(self.symbol,))
-        conn.close()
+        await asyncio.to_thread(self.client.initialize)
+    except AuthenticationError:
+        logger.warning(
+            "Binance credentials unavailable; running in offline simulation mode"
+        )
 
-        if df.empty or len(df) < max(self.slow_period, self.k_period) + 5:
-            return None
+    # Sync historical bars to ensure indicator vectors are full on boot
+    logger.info("Syncing historical kline buffers for initialized strategies...")
+    for strategy in self.strategies:
+        try:
+            rows = await asyncio.to_thread(
+                self.client.spot.fetch_ohlcv,
+                strategy.symbol,
+                KLINE_INTERVAL,
+                None,
+                KLINE_LIMIT,
+            )
+            if rows:
+                synced_count = 0
+                for row in rows:
+                    ts, open_, high, low, close, volume = row
+                    kline_data = {
+                        "symbol": strategy.symbol,
+                        "interval": KLINE_INTERVAL,
+                        "open_time": ts,
+                        "open": open_,
+                        "high": high,
+                        "low": low,
+                        "close": close,
+                        "volume": volume,
+                    }
+                    await self._persist_kline(kline_data)
+                    synced_count += 1
+                logger.info("Successfully synced %s historical bars for %s", synced_count, strategy.symbol)
+        except Exception as exc:
+            logger.warning("Failed to warm up historical database buffer for %s: %s", strategy.symbol, exc)
 
-        # Re-order row index vectors chronologically from past to present
-        df = df.iloc[::-1].reset_index(drop=True)
+    await self._refresh_equity()
+    for strategy in self.strategies:
+        await strategy.start()
 
-        # --- Vectorized MACD Computation ---
-        exp1 = df["close"].ewm(span=self.fast_period, adjust=False).mean()
-        exp2 = df["close"].ewm(span=self.slow_period, adjust=False).mean()
-        df["macd"] = exp1 - exp2
-        df["signal"] = df["macd"].ewm(span=self.signal_period, adjust=False).mean()
-        df["hist"] = df["macd"] - df["signal"]
+    self._running = True
+    self._active = True
+    logger.info(
+        "System ready: strategies=%s symbols=%s",
+        len(self.strategies),
+        SYMBOL_WHITELIST,
+    )
 
-        # --- Vectorized KDJ Computation ---
-        low_min = df["low"].rolling(window=self.k_period).min()
-        high_max = df["high"].rolling(window=self.k_period).max()
-        df["rsv"] = ((df["close"] - low_min) / (high_max - low_min + 1e-8)) * 100
+    # Spawn a background WebSocket stream task for each loaded strategy symbol
+    for strategy in self.strategies:
+        task = asyncio.create_task(self._websocket_market_stream(strategy))
+        self._ws_tasks.append(task)
 
-        k_values, d_values = [], []
-        current_k, current_d = 50.0, 50.0
-
-        for rsv in df["rsv"]:
-            if pd.isna(rsv):
-                k_values.append(None)
-                d_values.append(None)
+async def _websocket_market_stream(self, strategy: BaseStrategy) -> None:
+    """Persistent low-latency loop consuming candles via CCXT Pro WebSockets."""
+    logger.info("WebSocket stream activated for symbol %s", strategy.symbol)
+    while self._running:
+        try:
+            # Watch incoming candle via WebSocket connection stream
+            ohlcv = await self.ws_client.watch_ohlcv(strategy.symbol, KLINE_INTERVAL)
+            if not ohlcv:
+                continue
+            
+            ts, open_, high, low, close, volume = ohlcv[-1]
+            kline = {
+                "symbol": strategy.symbol,
+                "interval": KLINE_INTERVAL,
+                "open_time": ts,
+                "open": open_,
+                "high": high,
+                "low": low,
+                "close": close,
+                "volume": volume,
+            }
+            
+            # Persist bar into local sqlite storage
+            await self._persist_kline(kline)
+            
+            # Immediately execute strategy cycle evaluation using fresh data
+            if not self.risk.circuit_breaker_tripped:
+                kline_signals = await strategy.on_kline_update(kline)
+                if kline_signals:
+                    await self._dispatch_signals(strategy, kline_signals)
             else:
-                current_k = (2 / 3) * current_k + (1 / 3) * rsv
-                current_d = (2 / 3) * current_d + (1 / 3) * current_k
-                k_values.append(current_k)
-                d_values.append(current_d)
+                logger.error("Circuit breaker active; skipping strategy execution")
+                
+        except Exception as e:
+            logger.error("WebSocket stream error on %s: %s", strategy.symbol, e)
+            await asyncio.sleep(5)  # Backoff penalty before automatic reconnection
 
-        df["k"] = k_values
-        df["d"] = d_values
-        df["j"] = 3 * df["k"] - 2 * df["d"]
+@property
+def is_running(self) -> bool:
+    return self._running and self._active
 
-        return df
+def get_status(self) -> dict[str, Any]:
+    risk_status = self.risk.get_status()
+    return {
+        "running": self.is_running,
+        "sandbox": self.sandbox,
+        "tick_interval": self.tick_interval,
+        "strategy_count": len(self.strategies),
+        "strategies": [
+            {"name": s.name, "symbol": s.symbol, "running": s.is_running}
+            for s in self.strategies
+        ],
+        "risk": risk_status,
+    }
+
+async def shutdown(self) -> None:
+    if not self._active:
+        return
+    self._running = False
+    self._active = False
+    logger.info("Shutting down quant trading system")
+
+    # Cancel WebSocket feed streams cleanly
+    for task in self._ws_tasks:
+        task.cancel()
+    await asyncio.gather(*self._ws_tasks, return_exceptions=True)
+    await self.ws_client.close()
+
+    for strategy in self.strategies:
+        await strategy.stop()
+
+    await asyncio.to_thread(self.client.close)
+    self.db.close()
+    self._shutdown_event.set()
+
+async def _refresh_equity(self) -> None:
+    try:
+        balance = await asyncio.to_thread(self.client.spot.fetch_balance)
+        total_usdt = float(balance.get("total", {}).get("USDT", 0) or 0)
+        self.risk.update_equity(total_usdt)
+        logger.debug("Equity snapshot updated: USDT=%.4f", total_usdt)
     except Exception as exc:
-        logger.error("Error calculating indicators for %s: %s", self.symbol, exc)
+        logger.warning("Unable to refresh equity for risk checks: %s", exc)
+
+async def _persist_kline(self, kline: dict[str, Any]) -> None:
+    with self.db.transaction() as conn:
+        conn.execute(
+            """
+            INSERT INTO market_kline (
+                symbol, interval, open_time, open, high, low, close, volume
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(symbol, interval, open_time) DO UPDATE SET
+                open=excluded.open,
+                high=excluded.high,
+                low=excluded.low,
+                close=excluded.close,
+                volume=excluded.volume
+            """,
+            (
+                kline["symbol"],
+                kline["interval"],
+                kline["open_time"],
+                kline["open"],
+                kline["high"],
+                kline["low"],
+                kline["close"],
+                kline["volume"],
+            ),
+        )
+
+async def _execute_signal(self, signal: dict[str, Any]) -> Optional[dict[str, Any]]:
+    try:
+        self.risk.approve_and_record(signal)
+    except RiskViolation as exc:
+        logger.warning("Signal blocked by risk controller [%s]: %s", exc.code, exc)
         return None
 
-async def on_kline_update(self, kline: dict[str, Any]) -> list[dict[str, Any]]:
-    """Fires whenever the market core engine updates or caches a new Bar."""
-    if not self.is_running or self.is_order_pending:
-        return []
+    action = signal.get("action", "create")
+    market_type = signal.get("market_type", "spot")
+    symbol = signal["symbol"]
 
-    df = self._calculate_indicators()
-    if df is None or len(df) < 3:
-        return []
+    try:
+        if action == "cancel":
+            result = await asyncio.to_thread(
+                self.executor.cancel_order,
+                market_type,
+                symbol,
+                order_id=signal.get("exchange_order_id"),
+                client_order_id=signal.get("client_order_id"),
+            )
+        else:
+            result = await asyncio.to_thread(
+                self.executor.create_order,
+                market_type,
+                symbol,
+                signal["side"],
+                signal["order_type"],
+                float(signal["quantity"]),
+                price=signal.get("price"),
+                client_order_id=signal.get("client_order_id"),
+                params=signal.get("params"),
+            )
+    except Exception as exc:
+        logger.error("Order execution failed: %s", exc)
+        return None
 
-    # Target index -2 represents the last closed candle to eliminate forward-looking lookahead bias
-    idx_prev = -2
+    await self._persist_trade_order(signal, result)
+    return result
 
-    hist_prev = df["hist"].iloc[idx_prev - 1]
-    hist_curr = df["hist"].iloc[idx_prev]
-
-    j_prev = df["j"].iloc[idx_prev - 1]
-    j_curr = df["j"].iloc[idx_prev]
-
-    current_close = float(kline["close"])
-    client_id = f"cl_{self.name}_{kline['open_time']}"
-    signals = []
-
-    # Evaluation Strategy: Entry Execution
-    if not self.has_position:
-        macd_golden_cross = (hist_prev <= 0 and hist_curr > 0) or (
-            hist_prev > 0 and hist_curr > hist_prev
+async def _persist_trade_order(
+    self,
+    signal: dict[str, Any],
+    result: dict[str, Any],
+) -> None:
+    with self.db.transaction() as conn:
+        conn.execute(
+            """
+            INSERT INTO trade_orders (
+                strategy_name, client_order_id, exchange_order_id, symbol,
+                side, order_type, price, quantity, filled_quantity, status, signal_json
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(client_order_id) DO UPDATE SET
+                exchange_order_id=excluded.exchange_order_id,
+                filled_quantity=excluded.filled_quantity,
+                status=excluded.status,
+                updated_at=datetime('now')
+            """,
+            (
+                signal.get("strategy_name", "unknown"),
+                result.get("client_order_id") or signal.get("client_order_id"),
+                result.get("exchange_order_id"),
+                result.get("symbol") or signal.get("symbol"),
+                result.get("side") or signal.get("side"),
+                result.get("order_type") or signal.get("order_type"),
+                result.get("price"),
+                result.get("quantity") or signal.get("quantity"),
+                result.get("filled_quantity") or 0,
+                result.get("status"),
+                json.dumps(signal, ensure_ascii=False),
+            ),
         )
-        kdj_slope_up = j_curr > j_prev and j_curr < 80
 
-        if macd_golden_cross and kdj_slope_up:
-            logger.info(
-                "🟢 [%s] Production Trend Buy Triggered. MACD_Hist: %.4f, KDJ_J: %.2f",
-                self.symbol,
-                hist_curr,
-                j_curr,
-            )
-            signal = self.build_signal(
-                action="create",
-                market_type=self.market_type,
-                side="buy",
-                order_type="market",
-                quantity=self.order_quantity,
-                client_order_id=client_id,
-            )
-            self.is_order_pending = True
-            signals.append(signal)
+async def _dispatch_signals(
+    self,
+    strategy: BaseStrategy,
+    signals: list[dict[str, Any]],
+) -> None:
+    for signal in signals:
+        result = await self._execute_signal(signal)
+        if result is not None:
+            await strategy.on_order_status(result)
 
-    # Evaluation Strategy: Exit Execution
-    elif self.has_position:
-        macd_death_cross = hist_prev >= 0 and hist_curr < 0
-        
-        stop_loss_triggered = False
-        take_profit_triggered = False
-        
-        if self.entry_price:
-            return_pct = ((current_close - self.entry_price) / self.entry_price) * 100
-            if return_pct <= -1.5:
-                stop_loss_triggered = True
-                logger.warning("🚨 [%s] Hard Stop Loss Triggered! Return: %.2f%%", self.symbol, return_pct)
-            elif return_pct >= 3.0:
-                take_profit_triggered = True
-                logger.info("🎯 [%s] Take Profit Target Met! Return: %.2f%%", self.symbol, return_pct)
+async def run(self) -> None:
+    await self.startup()
+    try:
+        while self._running:
+            await self._refresh_equity()
 
-        if macd_death_cross or stop_loss_triggered or take_profit_triggered:
-            logger.info("🔴 [%s] Production Trend Sell/Exit Triggered.", self.symbol)
-            signal = self.build_signal(
-                action="create",
-                market_type=self.market_type,
-                side="sell",
-                order_type="market",
-                quantity=self.order_quantity,
-                client_order_id=client_id,
-            )
-            self.is_order_pending = True
-            signals.append(signal)
+            # Periodic time-driven ticker event tracking hooks
+            if not self.risk.circuit_breaker_tripped:
+                for strategy in self.strategies:
+                    tick_signals = await strategy.on_tick()
+                    if tick_signals:
+                        await self._dispatch_signals(strategy, tick_signals)
 
-    return signals
+            try:
+                await asyncio.wait_for(
+                    self._shutdown_event.wait(),
+                    timeout=self.tick_interval,
+                )
+                break
+            except asyncio.TimeoutError:
+                continue
+    finally:
+        await self.shutdown()
 
-async def on_order_status(self, order: dict[str, Any]) -> None:
-    """Reconciles position switches on confirmed filled tracking responses."""
-    status = order.get("status")
-    side = order.get("side")
+def request_shutdown(self) -> None:
+    self._running = False
+    self._shutdown_event.set()
+def _load_strategies_from_db(db: DatabaseConnection) -> list[BaseStrategy]:
+"""Dynamically constructs runtime active strategy objects linked into the main execution array."""
+_ = db
+active_instances: list[BaseStrategy] = []
 
-    # Free the lock regardless of fill success or failure to avoid freezing strategy execution
-    if status in ("closed", "FILLED", "canceled", "rejected", "CANCELED", "REJECTED"):
-        self.is_order_pending = False
+active_instances.append(
+    MaTrendStrategy(
+        name="BTC_ShortTerm_Trend",
+        symbol="BTC/USDT",
+        params={
+            "market_type": "spot",
+            "order_quantity": 0.0005,
+            "fast_period": 12,
+            "slow_period": 26,
+            "signal_period": 9,
+        },
+    )
+)
+return active_instances
+def parse_args() -> argparse.Namespace:
+parser = argparse.ArgumentParser(description="Binance quantitative trading system")
+parser.add_argument(
+"--sandbox",
+action="store_true",
+default=BINANCE_SANDBOX,
+help="Use Binance sandbox/testnet",
+)
+parser.add_argument(
+"--tick-interval",
+type=float,
+default=TICK_INTERVAL_SEC,
+help="Main loop interval in seconds",
+)
+return parser.parse_args()
 
-    if status in ("closed", "FILLED"):
-        if side == "buy":
-            self.has_position = True
-            self.entry_price = float(order.get("price") or 0.0)
-            logger.info("🛒 [%s] Order Filled successfully: POSITION OPENED at %.4f", self.symbol, self.entry_price)
-        elif side == "sell":
-            self.has_position = False
-            self.entry_price = None
-            logger.info("💰 [%s] Order Filled successfully: POSITION CLOSED", self.symbol)
+async def async_main(strategies: Optional[list[BaseStrategy]] = None) -> None:
+setup_logging(log_dir=LOG_DIR)
+args = parse_args()
 
-async def on_tick(self) -> list[dict[str, Any]]:
-    return []
+db = DatabaseConnection(DB_PATH)
+db.initialize_schema()
+active_strategies = strategies if strategies is not None else _load_strategies_from_db(db)
 
-```
+system = QuantTradingSystem(
+    active_strategies,
+    sandbox=args.sandbox,
+    tick_interval=args.tick_interval,
+)
 
----
+loop = asyncio.get_running_loop()
+for sig in (signal.SIGINT, signal.SIGTERM):
+    try:
+        loop.add_signal_handler(sig, system.request_shutdown)
+    except NotImplementedError:
+        pass
 
-## CURSOR EXECUTION SHORTCUT PROMPT
+await system.run()
+def main() -> None:
+asyncio.run(async_main())
 
-# Please open `strategies/ma_trend_strategy.py` and replace its code entirely with the updated robust version. This includes an `is_order_pending` state check lock to effectively shield the system from multi-order blast loops while operations are in transit to Binance servers.
+if name == "main":
+main()
+
+CURSOR EXECUTION SHORTCUT PROMPT
+Please open main.py and overwrite its content entirely with the updated asynchronous WebSocket-driven infrastructure. This integrates ccxt.pro to watch live market candle tickers via background streams, eliminating REST polling bottlenecks entirely and updating local SQLite state pipelines natively.
