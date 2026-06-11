@@ -1,0 +1,130 @@
+2026-06-11 11:04:29 | INFO     | test | routine
+2026-06-11 11:04:29 | WARNING  | test | warn
+2026-06-11 11:07:22 | INFO     | database.connection | Database schema initialized at C:\Users\zxjin\AppData\Local\Temp\tmpu29fj7sr\test.db (journal_mode=wal)
+2026-06-11 11:17:35 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 11:17:35 | INFO     | __main__ | Starting quant trading system (sandbox=False)
+2026-06-11 11:17:35 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 11:17:35 | INFO     | gateway.binance_client | Initializing Binance CCXT clients (sandbox=False)
+2026-06-11 11:17:35 | WARNING  | __main__ | Binance credentials unavailable; running in offline simulation mode
+2026-06-11 11:17:35 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:17:35 | INFO     | __main__ | System ready: strategies=0 symbols=('BTC/USDT', 'ETH/USDT')
+2026-06-11 11:17:35 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:17:40 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:17:45 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:17:50 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:17:55 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:18:36 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 11:18:36 | INFO     | __main__ | Starting quant trading system (sandbox=False)
+2026-06-11 11:18:36 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 11:18:36 | INFO     | gateway.binance_client | Initializing Binance CCXT clients (sandbox=False)
+2026-06-11 11:18:36 | WARNING  | __main__ | Binance credentials unavailable; running in offline simulation mode
+2026-06-11 11:18:36 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:18:36 | INFO     | __main__ | System ready: strategies=0 symbols=('BTC/USDT', 'ETH/USDT')
+2026-06-11 11:18:36 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:18:41 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:18:46 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:18:51 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:18:56 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:01 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:06 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:11 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:17 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:22 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:27 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:32 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:37 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:42 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:47 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:52 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:19:57 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:02 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:07 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:12 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:17 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:22 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:27 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:32 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:37 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:42 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:47 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:52 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:20:57 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:02 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:07 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:12 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:17 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:22 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:27 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:32 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:37 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:42 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:47 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:52 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:21:57 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:02 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:07 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:12 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:13 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 11:22:13 | INFO     | web.app | Web dashboard ready at http://127.0.0.1:8000
+2026-06-11 11:22:17 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:22 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:27 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:32 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:37 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:42 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:47 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:52 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:22:57 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:02 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:07 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:12 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:17 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:22 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:27 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:32 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:37 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:42 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:47 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:52 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:23:57 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:24:02 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:24:07 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:24:12 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:24:17 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:24:22 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:24:27 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:24:32 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:24:37 | WARNING  | __main__ | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:25:05 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 11:25:05 | INFO     | web.app | Web dashboard ready at http://127.0.0.1:8000
+2026-06-11 11:25:48 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 11:25:48 | INFO     | web.app | Trading system task started (sandbox=True)
+2026-06-11 11:25:48 | INFO     | main | Starting quant trading system (sandbox=True)
+2026-06-11 11:25:48 | INFO     | database.connection | Database schema initialized at D:\Projects\Quant_crypto_system\quant_crypto_system\data\quant.db (journal_mode=wal)
+2026-06-11 11:25:48 | INFO     | gateway.binance_client | Initializing Binance CCXT clients (sandbox=True)
+2026-06-11 11:25:48 | WARNING  | main | Binance credentials unavailable; running in offline simulation mode
+2026-06-11 11:25:48 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:25:48 | INFO     | main | System ready: strategies=0 symbols=('BTC/USDT', 'ETH/USDT')
+2026-06-11 11:25:48 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:25:53 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:25:58 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:03 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:04 | WARNING  | engine.risk_controller | Circuit breaker reset; daily drawdown baseline refreshed
+2026-06-11 11:26:08 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:13 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:18 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:23 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:28 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:33 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:38 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:43 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:48 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:53 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:26:58 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:27:03 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:27:08 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:27:13 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:27:18 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:27:23 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:27:28 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
+2026-06-11 11:27:33 | WARNING  | main | Unable to refresh equity for risk checks: Binance API credentials missing. Set BINANCE_API_KEY / BINANCE_API_SECRET or pass api_key/api_secret to BinanceClient.
