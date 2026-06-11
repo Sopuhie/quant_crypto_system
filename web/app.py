@@ -9,6 +9,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from config.settings import DB_PATH, WEB_HOST, WEB_PORT
+from utils.analytics import TradeAnalytics
 from utils.logger import get_logger, setup_logging
 
 logger = get_logger(__name__)
@@ -45,6 +46,8 @@ class DashboardHTTPHandler(BaseHTTPRequestHandler):
             self.get_strategy_configs()
         elif path == "/api/klines":
             self.get_market_klines()
+        elif path == "/api/analytics":
+            self.get_performance_analytics()
         else:
             self.serve_static_files(path)
 
@@ -158,6 +161,15 @@ class DashboardHTTPHandler(BaseHTTPRequestHandler):
             klines = [dict(row) for row in rows]
             self._set_headers()
             self.wfile.write(json.dumps(klines).encode("utf-8"))
+        except Exception as exc:
+            self._set_headers(status=500)
+            self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
+
+    def get_performance_analytics(self) -> None:
+        try:
+            metrics = TradeAnalytics.calculate_metrics()
+            self._set_headers()
+            self.wfile.write(json.dumps(metrics).encode("utf-8"))
         except Exception as exc:
             self._set_headers(status=500)
             self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))

@@ -4145,3 +4145,5 @@ y...
 2026-06-11 17:17:40 | INFO     | strategies.ma_trend_strategy | 🟢 [BTC/USDT] Production Trend Buy Triggered. MACD_Hist: 1.2830, KDJ_J: 68.23
 2026-06-11 17:17:40 | INFO     | strategies.ma_trend_strategy | 🛒 [BTC/USDT] Order Filled successfully: POSITION OPENED at 62922.9400
 2026-06-11 17:17:41 | INFO     | strategies.base_strategy | Strategy stopped: BTC_ShortTerm_Trend (BTC/USDT)
+2026-06-11 17:30:14 | INFO     | web.app | Web Dashboard Server running natively on http://127.0.0.1:8080
+2026-06-11 17:30:56 | INFO     | web.app | Web Dashboard Server running natively on http://127.0.0.1:8000

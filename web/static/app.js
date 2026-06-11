@@ -7,6 +7,10 @@ const els = {
   statDb: document.getElementById("stat-db"),
   statStrategies: document.getElementById("stat-strategies"),
   statOrders: document.getElementById("stat-orders"),
+  statWinRate: document.getElementById("stat-win-rate"),
+  statRealizedPnl: document.getElementById("stat-realized-pnl"),
+  statProfitFactor: document.getElementById("stat-profit-factor"),
+  statClosedTrades: document.getElementById("stat-closed-trades"),
   strategiesBody: document.getElementById("strategies-body"),
   positionsBody: document.getElementById("positions-body"),
   ordersBody: document.getElementById("orders-body"),
@@ -148,17 +152,49 @@ function renderOrders(rows) {
     .join("");
 }
 
+function renderAnalytics(metrics) {
+  els.statWinRate.textContent =
+    metrics.total_trades > 0 ? `${fmtNum(metrics.win_rate)}%` : "-";
+  els.statRealizedPnl.textContent = fmtNum(metrics.realized_pnl, 4);
+  els.statRealizedPnl.className =
+    metrics.realized_pnl > 0
+      ? "status-running"
+      : metrics.realized_pnl < 0
+        ? "side-sell"
+        : "";
+  els.statProfitFactor.textContent =
+    metrics.total_trades > 0 ? fmtNum(metrics.profit_factor, 2) : "-";
+  els.statClosedTrades.textContent = metrics.total_trades ?? 0;
+}
+
+async function apiOptional(path, fallback = null) {
+  try {
+    return await api(path);
+  } catch {
+    return fallback;
+  }
+}
+
 async function refreshAll() {
   try {
-    const [status, orders, positions, strategies, klines] = await Promise.all([
+    const [status, orders, positions, strategies, klines, analytics] = await Promise.all([
       api("/api/status"),
       api("/api/orders"),
       api("/api/positions"),
       api("/api/strategies"),
       api("/api/klines"),
+      apiOptional("/api/analytics", {
+        total_trades: 0,
+        winning_trades: 0,
+        losing_trades: 0,
+        win_rate: 0,
+        realized_pnl: 0,
+        profit_factor: 0,
+      }),
     ]);
 
     renderStatus(status);
+    renderAnalytics(analytics);
     renderOrders(orders);
     renderPositions(positions);
     renderStrategies(strategies);

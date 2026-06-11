@@ -1,86 +1,130 @@
-CURSOR IMPLEMENTATION GUIDE: EXTENDING INSTANT NOTIFICATION TELEGRAM ENGINE
+================================================================================
+CURSOR IMPLEMENTATION GUIDE: ADVANCED PERFORMANCE OPTIMIZATION AND METRICS
 Target Environment: macOS (Single-User Lightweight Edition)
 Core Task:
-Create a dedicated utility module utils/notifier.py and implement an asynchronous instant messaging forwarder (supporting Telegram Bot or Webhook). Tie this notifier into the main order execution and risk exception pipelines so the system can proactively send trade confirmations or circuit-breaker alerts directly to your phone.
+Perform a strict architectural audit on the newly submitted codebase layers. Review the fully integrated ccxt.pro WebSocket workflows, the robust risk check mechanisms, and the database persistence queues. Formulate the next definitive technical milestone to add advanced real-time performance tracking and PnL metrics calculations.
 
-NEW FILE: CODING THE INSTANT TELEGRAM / WEBHOOK ALERT HUB
-Path: utils/notifier.py
+CODEBASE REVIEWS AND AUDIT REPORT
+Architectural Integrity:
+The system structure has matured beautifully into a production-grade, event-driven lightweight engine. The main.py script cleanly orchestrates the WebSocket stream loops (watch_ohlcv) without hitting rate-limiting constraints. The pre-trade risk checkpoints and the concurrency safety locks (is_order_pending) inside strategies/ma_trend_strategy.py are functioning correctly.
+
+Local Diagnostic Tool Detected:
+A professional, independent simulation layer engine/backtester.py has been added to the project root directory. This script utilizes historical rows fetched from market_kline to evaluate technical indicator efficiency offline, giving you an isolated environment to verify strategy logic before deploying it to live tracking.
+
+Next Logical Progression Milestone (Real-time PnL & Performance Tracker):
+Now that trades are being registered natively on confirmed fills and position matrices are locked, we must upgrade the asset tracker. Currently, the local SQLite database holds raw orders, but the Web UI cannot display dynamic floating calculations like Win Rate (胜率), Profit Factor (盈亏比), or Realized PnL (已实现盈亏). We need to introduce an analytics utility to calculate these metrics and serve them through a fresh API endpoint.
+
+MODIFIED FILE 1: CREATING THE PERFORMANCE MONITORING CONTROLLER
+Path: utils/analytics.py (New File)
 Action Required:
-Instruct Cursor to create a brand new utility file under utils/notifier.py to manage outward communications without blocking the core asynchronous event streams.
+Instruct Cursor to create a brand new performance calculation worker under utils/analytics.py. This component will compile stats from the trade_orders table to dynamically calculate quantitative performance matrices.
 
-File Content for utils/notifier.py:
+File Content for utils/analytics.py:
 
-import urllib.request
-import json
-import os
-import asyncio
-from utils.logger import get_logger
+import sqlite3
+from typing import Any, dict
+from config.settings import DB_PATH
 
-logger = get_logger(name)
+class TradeAnalytics:
+@staticmethod
+def calculate_metrics() -> dict[str, Any]:
+"""Compiles execution orders directly from SQLite to determine real-time strategy performance."""
+metrics = {
+"total_trades": 0,
+"winning_trades": 0,
+"losing_trades": 0,
+"win_rate": 0.0,
+"realized_pnl": 0.0,
+"profit_factor": 0.0
+}
 
-class SystemNotifier:
-def init(self) -> None:
-# Configuration environments fetched from environment or settings
-self.telegram_token = os.getenv("TELEGRAM_BOT_TOKEN", "")
-self.telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID", "")
-self.webhook_url = os.getenv("GENERIC_WEBHOOK_URL", "") # Supports generic Discord/DingTalk webhooks
-
-async def send_notification(self, text: str) -> None:
-    \"\"\"Asynchronously dispatches raw textual logs to external server channels without stopping loops.\"\"\"
-    if not text:
-        return
-
-    # Attempt Telegram Forwarding if tokens are available
-    if self.telegram_token and self.telegram_chat_id:
-        await self._send_telegram(text)
-    
-    # Attempt standard Webhook forwarding if configured
-    if self.webhook_url:
-        await self._send_webhook(text)
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
         
-    logger.debug("Local broadcast captured inside notification pool: %s", text)
-
-async def _send_telegram(self, text: str) -> None:
-    url = f"[https://api.telegram.org/bot](https://api.telegram.org/bot){self.telegram_token}/sendMessage"
-    payload = {"chat_id": self.telegram_chat_id, "text": text, "parse_mode": "HTML"}
-    try:
-        await asyncio.to_thread(self._execute_post, url, payload)
-    except Exception as e:
-        logger.error("Failed to route notification via Telegram network channels: %s", e)
-
-async def _send_webhook(self, text: str) -> None:
-    payload = {"text": f"[QUANT SYSTEM NOTICE] {text}"}
-    try:
-        await asyncio.to_thread(self._execute_post, self.webhook_url, payload)
-    except Exception as e:
-        logger.error("Failed to route notification via generic webhook payload: %s", e)
-
-def _execute_post(self, url: str, data: dict) -> None:
-    req = urllib.request.Request(url, method="POST")
-    req.add_header("Content-Type", "application/json; charset=utf-8")
-    jsondata = json.dumps(data).encode("utf-8")
-    with urllib.request.urlopen(req, data=jsondata, timeout=5) as response:
-        response.read()
-MODIFIED FILE: CONNECTING THE NOTIFIER TO MAIN EXECUTIVE EVENT PIPELINE
-Path: main.py
+        # Fetch all completed or filled orders ordered sequentially
+        cursor.execute(\"\"\"
+            SELECT side, price, quantity, filled_quantity, status 
+            FROM trade_orders 
+            WHERE status IN ('closed', 'FILLED') 
+            ORDER BY id ASC
+        \"\"\")
+        orders = cursor.fetchall()
+        conn.close()
+        
+        if not orders:
+            return metrics
+            
+        total_wins = 0
+        total_losses = 0
+        gross_profit = 0.0
+        gross_loss = 0.0
+        
+        # Simple FIFO / Pairwise match simulation to determine discrete performance flags
+        position_entry = None
+        for order in orders:
+            side = order["side"].lower()
+            price = float(order["price"] or 0.0)
+            qty = float(order["filled_quantity"] or order["quantity"] or 0.0)
+            
+            if side == "buy":
+                position_entry = price
+            elif side == "sell" and position_entry is not None:
+                trade_pnl = (price - position_entry) * qty
+                metrics["total_trades"] += 1
+                metrics["realized_pnl"] += trade_pnl
+                
+                if trade_pnl > 0:
+                    total_wins += 1
+                    gross_profit += trade_pnl
+                else:
+                    total_losses += 1
+                    gross_loss += abs(trade_pnl)
+                    
+                position_entry = None  # Reset tracking lock
+        
+        # Populate performance matrices safely
+        if metrics["total_trades"] > 0:
+            metrics["winning_trades"] = total_wins
+            metrics["losing_trades"] = total_losses
+            metrics["win_rate"] = round((total_wins / metrics["total_trades"]) * 100, 2)
+            metrics["profit_factor"] = round(gross_profit / gross_loss, 2) if gross_loss > 0 else round(gross_profit, 2)
+            metrics["realized_pnl"] = round(metrics["realized_pnl"], 4)
+            
+    except Exception:
+        pass
+        
+    return metrics
+MODIFIED FILE 2: REGISTERING THE PERFORMANCE ROUTE IN THE WEB CONTROLLER
+Path: web/app.py
 Action Required:
-Open main.py, import the newly constructed SystemNotifier class framework, and invoke its async delivery triggers inside the _execute_signal method and trip_circuit_breaker sequences to receive real-time updates.
+Open web/app.py and expose a clean API lookup routing path for the new analytics endpoint so your web dashboards can fetch the compiled statistics.
 
-Modification Instructions for main.py:
+Modification Instructions for web/app.py:
 
-Import the class: from utils.notifier import SystemNotifier
+Add the analytics import at the top of the file:
+from utils.analytics import TradeAnalytics
 
-Initialize it in QuantTradingSystem.__init__: self.notifier = SystemNotifier()
+In the do_GET routing handler method, register the fresh API path right alongside the active lookups:
+elif path == "/api/analytics":
+self.get_performance_analytics()
 
-In _execute_signal, right after successful create_order fill executions, add:
-await self.notifier.send_notification(f"🟢 <b>订单成交确认</b>\\n交易对: {symbol}\\n方向: {signal['side']}\\n数量: {signal['quantity']}")
+Add the corresponding endpoint method within the DashboardHTTPHandler class body:
 
-In engine/risk_controller.py, pass or bind the notifier to trigger messages if the daily drawdown circuit breaker fires.
+def get_performance_analytics(self):
+try:
+metrics = TradeAnalytics.calculate_metrics()
+self._set_headers()
+self.wfile.write(json.dumps(metrics).encode("utf-8"))
+except Exception as exc:
+self._set_headers(status=500)
+self.wfile.write(json.dumps({"error": str(exc)}).encode("utf-8"))
 
 CURSOR EXECUTION SHORTCUT PROMPT
-Please read the framework extension specs.
+Please read the current repository state and implement the next development phase.
 
-Create a new utility class under utils/notifier.py using standard low-overhead native request handlers.
+Create a new file under utils/analytics.py to calculate dynamic metrics (Win Rate, Realized PnL, Profit Factor) from the completed entries in the SQLite order logs.
 
-Integrate this notifier inside main.py under the QuantTradingSystem lifecycle, wiring it to emit push alerts automatically to your configured credentials upon successful order creation fills or pre-trade wind-down risk control violations.
+Update web/app.py to integrate this worker, providing a new /api/analytics endpoint to feed performance statistics to the user interface.
 ================================================================================
