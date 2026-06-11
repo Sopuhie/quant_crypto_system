@@ -22,7 +22,7 @@ class MaTrendStrategy(BaseStrategy):
     Logic:
     - Calculates MACD and KDJ from historical Klines cached in SQLite.
     - Buy (Long) Signal: MACD Golden Cross (Histogram turns positive) AND KDJ J-line slope is upward.
-    - Sell (Short/Exit) Signal: MACD Death Cross (Histogram turns negative) OR Position open limit exit.
+    - Sell (Short/Exit) Signal: MACD Death Cross, -1.5% stop-loss, or +3.0% take-profit.
     """
 
     def __init__(
@@ -42,6 +42,7 @@ class MaTrendStrategy(BaseStrategy):
 
         self.last_signal_time: Optional[int] = None
         self.has_position = False
+        self.entry_price: Optional[float] = None
 
     async def start(self) -> None:
         """Executed on bootstrapper launch; pulls target constraints if required."""
@@ -113,7 +114,6 @@ class MaTrendStrategy(BaseStrategy):
         if df is None or len(df) < 3:
             return []
 
-        # Target index -2 represents the last closed candle to eliminate forward-looking lookahead bias
         idx_prev = -2
 
         hist_prev = df["hist"].iloc[idx_prev - 1]
@@ -122,10 +122,11 @@ class MaTrendStrategy(BaseStrategy):
         j_prev = df["j"].iloc[idx_prev - 1]
         j_curr = df["j"].iloc[idx_prev]
 
+        current_close = float(kline["close"])
         client_id = f"cl_{self.name}_{kline['open_time']}"
         signals = []
 
-        # Evaluation Strategy: Entry Execution
+        # 1. Standard Entry Execution: MACD Golden Cross + KDJ Slope upward
         if not self.has_position:
             macd_golden_cross = (hist_prev <= 0 and hist_curr > 0) or (
                 hist_prev > 0 and hist_curr > hist_prev
@@ -134,7 +135,7 @@ class MaTrendStrategy(BaseStrategy):
 
             if macd_golden_cross and kdj_slope_up:
                 logger.info(
-                    "🟢 [%s] Trend Buy Signal Triggered. MACD_Hist: %.4f, KDJ_J: %.2f",
+                    "🟢 [%s] Production Trend Buy Triggered. MACD_Hist: %.4f, KDJ_J: %.2f",
                     self.symbol,
                     hist_curr,
                     j_curr,
@@ -149,15 +150,32 @@ class MaTrendStrategy(BaseStrategy):
                 )
                 signals.append(signal)
 
-        # Evaluation Strategy: Exit Execution
+        # 2. Production Exit Execution: MACD Death Cross OR Defensive Take-Profit / Stop-Loss
         elif self.has_position:
             macd_death_cross = hist_prev >= 0 and hist_curr < 0
-            if macd_death_cross:
-                logger.info(
-                    "🔴 [%s] Trend Sell/Exit Signal Triggered. MACD_Hist: %.4f",
-                    self.symbol,
-                    hist_curr,
-                )
+
+            stop_loss_triggered = False
+            take_profit_triggered = False
+
+            if hasattr(self, "entry_price") and self.entry_price:
+                return_pct = ((current_close - self.entry_price) / self.entry_price) * 100
+                if return_pct <= -1.5:
+                    stop_loss_triggered = True
+                    logger.warning(
+                        "🚨 [%s] Hard Stop Loss Triggered! Return: %.2f%%",
+                        self.symbol,
+                        return_pct,
+                    )
+                elif return_pct >= 3.0:
+                    take_profit_triggered = True
+                    logger.info(
+                        "🎯 [%s] Take Profit Target Met! Return: %.2f%%",
+                        self.symbol,
+                        return_pct,
+                    )
+
+            if macd_death_cross or stop_loss_triggered or take_profit_triggered:
+                logger.info("🔴 [%s] Trend Sell/Exit Triggered.", self.symbol)
                 signal = self.build_signal(
                     action="create",
                     market_type=self.market_type,
@@ -171,17 +189,26 @@ class MaTrendStrategy(BaseStrategy):
         return signals
 
     async def on_order_status(self, order: dict[str, Any]) -> None:
-        """Reconciles position switches on confirmed filled tracking responses."""
+        """Reconciles position switches and caches entry price for risk exits."""
         status = order.get("status")
         side = order.get("side")
 
         if status in ("closed", "FILLED"):
             if side == "buy":
                 self.has_position = True
-                logger.info("🛒 [%s] Order Filled successfully: POSITION OPENED", self.symbol)
+                self.entry_price = float(order.get("price") or 0.0)
+                logger.info(
+                    "🛒 [%s] Position Opened. Cached Entry Price: %.4f",
+                    self.symbol,
+                    self.entry_price,
+                )
             elif side == "sell":
                 self.has_position = False
-                logger.info("💰 [%s] Order Filled successfully: POSITION CLOSED", self.symbol)
+                self.entry_price = None
+                logger.info(
+                    "💰 [%s] Position Closed. Reference baseline cleared.",
+                    self.symbol,
+                )
 
     async def on_tick(self) -> list[dict[str, Any]]:
         return []

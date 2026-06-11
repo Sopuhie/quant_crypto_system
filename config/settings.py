@@ -84,7 +84,7 @@ def load_binance_credentials() -> tuple[Optional[str], Optional[str]]:
     return api_key, api_secret
 
 
-def load_binance_sandbox(default: bool = False) -> bool:
+def load_binance_sandbox(default: bool = True) -> bool:
     """
     Load sandbox flag.
 
@@ -107,4 +107,4 @@ def load_binance_sandbox(default: bool = False) -> bool:
 
 
 # Backward-compatible module constant
-BINANCE_SANDBOX = load_binance_sandbox(default=False)
+BINANCE_SANDBOX = load_binance_sandbox(default=True)
