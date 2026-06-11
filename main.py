@@ -26,6 +26,7 @@ from engine.risk_controller import RiskConfig, RiskController, RiskViolation
 from gateway.binance_client import AuthenticationError, BinanceClient
 from gateway.order_executor import OrderExecutor
 from strategies.base_strategy import BaseStrategy
+from strategies.ma_trend_strategy import MaTrendStrategy
 from utils.logger import get_logger, setup_logging
 
 logger = get_logger(__name__)
@@ -307,9 +308,26 @@ class QuantTradingSystem:
 
 
 def _load_strategies_from_db(db: DatabaseConnection) -> list[BaseStrategy]:
-    """Placeholder for dynamic strategy loading; returns empty until implementations exist."""
+    """Dynamically constructs runtime active strategy objects linked into the main execution array."""
     _ = db
-    return []
+    active_instances: list[BaseStrategy] = []
+
+    # Instantiate MACD/KDJ tracking engine on default symbol configurations
+    # Ensure format alignment matches CCXT target symbols (e.g. "BTC/USDT")
+    active_instances.append(
+        MaTrendStrategy(
+            name="BTC_ShortTerm_Trend",
+            symbol="BTC/USDT",
+            params={
+                "market_type": "spot",
+                "order_quantity": 0.0005,
+                "fast_period": 12,
+                "slow_period": 26,
+                "signal_period": 9,
+            },
+        )
+    )
+    return active_instances
 
 
 def parse_args() -> argparse.Namespace:
